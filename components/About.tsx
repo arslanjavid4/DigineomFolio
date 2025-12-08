@@ -1,13 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FiUsers, FiAward, FiGlobe, FiHeart } from 'react-icons/fi'
+import { Users, Award, Globe, Heart } from 'lucide-react'
 
 const stats = [
-  { icon: FiUsers, value: '50+', label: 'Happy Clients' },
-  { icon: FiAward, value: '100+', label: 'Projects Completed' },
-  { icon: FiGlobe, value: '15+', label: 'Countries Served' },
-  { icon: FiHeart, value: '98%', label: 'Client Satisfaction' },
+  { icon: Users, value: '50+', label: 'Happy Clients' },
+  { icon: Award, value: '100+', label: 'Projects Completed' },
+  { icon: Globe, value: '15+', label: 'Countries Served' },
+  { icon: Heart, value: '98%', label: 'Client Satisfaction' },
 ]
 
 const values = [

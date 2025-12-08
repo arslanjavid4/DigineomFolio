@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FiExternalLink, FiGithub } from 'react-icons/fi'
+import { ExternalLink, Github } from 'lucide-react'
 
 const projects = [
   {
@@ -95,14 +95,14 @@ export default function Portfolio() {
                       href="#"
                       className="flex-1 bg-white text-primary-600 px-4 py-2 rounded-lg font-semibold text-center hover:bg-primary-50 transition-colors"
                     >
-                      <FiExternalLink className="inline mr-2" />
+                      <ExternalLink className="inline mr-2" />
                       View
                     </a>
                     <a
                       href="#"
                       className="flex-1 bg-primary-600 text-white px-4 py-2 rounded-lg font-semibold text-center hover:bg-primary-700 transition-colors"
                     >
-                      <FiGithub className="inline mr-2" />
+                      <Github className="inline mr-2" />
                       Code
                     </a>
                   </div>

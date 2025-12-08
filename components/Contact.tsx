@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi'
+import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -30,19 +30,19 @@ export default function Contact() {
 
   const contactInfo = [
     {
-      icon: FiMail,
+      icon: Mail,
       title: 'Email',
       content: 'hello@digineom.com',
       link: 'mailto:hello@digineom.com',
     },
     {
-      icon: FiPhone,
+      icon: Phone,
       title: 'Phone',
       content: '+1 (555) 123-4567',
       link: 'tel:+15551234567',
     },
     {
-      icon: FiMapPin,
+      icon: MapPin,
       title: 'Location',
       content: '123 Tech Street, Digital City',
       link: '#',
@@ -185,7 +185,7 @@ export default function Contact() {
                 className="w-full bg-primary-600 text-white py-4 rounded-lg font-semibold hover:bg-primary-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center"
               >
                 Send Message
-                <FiSend className="ml-2" />
+                <Send className="ml-2" />
               </button>
             </div>
           </motion.form>
