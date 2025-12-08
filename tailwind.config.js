@@ -59,6 +59,10 @@ module.exports = {
             transform: "translate(-50%,-40%) scale(1)",
           },
         },
+        "autoplay-progress": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(100%)" },
+        },
       },
     },
   },
