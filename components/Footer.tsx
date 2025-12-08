@@ -2,6 +2,7 @@
 
 import { Github, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { HighlightGroup, HighlighterItem } from '@/components/ui/highlighter'
 
 export default function Footer() {
@@ -46,7 +47,15 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">DigiNeom</h3>
+            <Link href="/" className="inline-block mb-4">
+              <Image
+                src="/Images/QVC9EYR2LA7kyLTy3yqvyEimTI.png"
+                alt="DigiNeom"
+                width={140}
+                height={50}
+                className="h-10 w-auto"
+              />
+            </Link>
             <p className="text-neutral-400 mb-6 leading-relaxed text-sm">
               Creating exceptional digital experiences through innovative
               software development and cutting-edge web design.

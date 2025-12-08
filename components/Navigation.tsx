@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -36,8 +37,15 @@ export default function Navigation() {
         )}
       >
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-white tracking-tight">
-            DigiNeom
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/Images/QVC9EYR2LA7kyLTy3yqvyEimTI.png"
+              alt="DigiNeom"
+              width={120}
+              height={40}
+              className="h-8 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
