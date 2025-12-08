@@ -5,8 +5,6 @@ import Footer from '@/components/Footer'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
-import { HighlightGroup, HighlighterItem } from '@/components/ui/highlighter'
-import { ShimmerButton } from '@/components/ui/shimmer-button'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -36,8 +34,8 @@ export default function Contact() {
     {
       icon: Mail,
       title: 'Email',
-      content: 'hello@digineom.com',
-      link: 'mailto:hello@digineom.com',
+      content: 'info@digineo.co',
+      link: 'mailto:info@digineo.co',
     },
     {
       icon: Phone,
@@ -54,7 +52,7 @@ export default function Contact() {
   ]
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#050505] relative">
       <Navigation />
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -64,10 +62,10 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-primary-900">
-              Get In <span className="text-primary-600">Touch</span>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white tracking-tight">
+              Get In <span className="gradient-text">Touch</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
               Ready to start your next project? Let's discuss how we can help
               bring your vision to life.
             </p>
@@ -82,40 +80,37 @@ export default function Contact() {
               className="space-y-8"
             >
               <div>
-                <h3 className="text-2xl font-bold mb-6 text-primary-900">
+                <h3 className="text-2xl font-bold mb-6 text-white tracking-tight">
                   Contact Information
                 </h3>
-                <p className="text-gray-600 mb-8">
+                <p className="text-neutral-400 mb-8">
                   We're here to help! Reach out to us through any of these
                   channels.
                 </p>
               </div>
 
-              <HighlightGroup>
-                <div className="space-y-6">
-                  {contactInfo.map((info, index) => {
-                    const Icon = info.icon
-                    return (
-                      <HighlighterItem key={info.title} className="rounded-xl">
-                        <a
-                          href={info.link}
-                          className="flex items-start space-x-4 p-6 rounded-xl bg-gradient-to-br from-primary-50 to-white border border-primary-100 hover:shadow-lg transition-all"
-                        >
-                          <div className="bg-primary-900 p-3 rounded-lg">
-                            <Icon className="text-2xl text-white" />
-                          </div>
-                          <div>
-                            <h4 className="font-semibold text-lg mb-1 text-primary-900">
-                              {info.title}
-                            </h4>
-                            <p className="text-gray-600">{info.content}</p>
-                          </div>
-                        </a>
-                      </HighlighterItem>
-                    )
-                  })}
-                </div>
-              </HighlightGroup>
+              <div className="space-y-4">
+                {contactInfo.map((info, index) => {
+                  const Icon = info.icon
+                  return (
+                    <a
+                      key={info.title}
+                      href={info.link}
+                      className="flex items-start space-x-4 p-6 glass-card-hover group"
+                    >
+                      <div className="bg-white/10 border border-white/10 p-3 rounded-lg group-hover:bg-white/20 transition-colors">
+                        <Icon className="text-2xl text-white" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-1 text-white">
+                          {info.title}
+                        </h4>
+                        <p className="text-neutral-400">{info.content}</p>
+                      </div>
+                    </a>
+                  )
+                })}
+              </div>
             </motion.div>
 
             {/* Contact Form */}
@@ -124,13 +119,13 @@ export default function Contact() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               onSubmit={handleSubmit}
-              className="bg-gradient-to-br from-primary-50 to-white p-8 rounded-2xl shadow-lg border border-primary-100"
+              className="glass-card-hover p-8"
             >
               <div className="space-y-6">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
+                    className="block text-sm font-semibold text-white mb-2"
                   >
                     Name
                   </label>
@@ -141,7 +136,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all bg-white"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/20 outline-none transition-all text-white placeholder:text-neutral-500"
                     placeholder="Your Name"
                   />
                 </div>
@@ -149,7 +144,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
+                    className="block text-sm font-semibold text-white mb-2"
                   >
                     Email
                   </label>
@@ -160,7 +155,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all bg-white"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/20 outline-none transition-all text-white placeholder:text-neutral-500"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -168,7 +163,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="company"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
+                    className="block text-sm font-semibold text-white mb-2"
                   >
                     Company (Optional)
                   </label>
@@ -178,7 +173,7 @@ export default function Contact() {
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all bg-white"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/20 outline-none transition-all text-white placeholder:text-neutral-500"
                     placeholder="Your Company"
                   />
                 </div>
@@ -186,7 +181,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
+                    className="block text-sm font-semibold text-white mb-2"
                   >
                     Message
                   </label>
@@ -197,18 +192,18 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all resize-none bg-white"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/20 outline-none transition-all resize-none text-white placeholder:text-neutral-500"
                     placeholder="Tell us about your project..."
                   />
                 </div>
 
-                <ShimmerButton
+                <button
                   type="submit"
-                  className="w-full px-8 py-4 text-lg"
+                  className="w-full px-8 py-4 bg-white text-black rounded-full font-semibold text-lg hover:bg-white/90 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
                 >
                   Send Message
-                  <Send className="ml-2 w-5 h-5" />
-                </ShimmerButton>
+                  <Send className="w-5 h-5" />
+                </button>
               </div>
             </motion.form>
           </div>

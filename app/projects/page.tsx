@@ -4,7 +4,6 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ExternalLink, Github } from 'lucide-react'
 
 const allProjects = [
   {
@@ -92,7 +91,7 @@ const allProjects = [
 
 export default function Projects() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#050505] relative">
       <Navigation />
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -102,15 +101,15 @@ export default function Projects() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-primary-900">
-              Our <span className="text-primary-600">Portfolio</span>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white tracking-tight">
+              Our <span className="gradient-text">Portfolio</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
               Explore our collection of successful projects and case studies
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {allProjects.map((project, index) => (
               <motion.div
                 key={project.title}
@@ -118,7 +117,7 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+                className="glass-card-hover overflow-hidden group"
               >
                 <div className="relative h-64 overflow-hidden">
                   <Image
@@ -127,38 +126,21 @@ export default function Projects() {
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="absolute bottom-4 left-4 right-4 flex gap-3">
-                      <a
-                        href={project.link}
-                        className="flex-1 bg-white text-primary-900 px-4 py-2 rounded-lg font-semibold text-center hover:bg-primary-50 transition-colors flex items-center justify-center gap-2"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        View
-                      </a>
-                      <a
-                        href={project.github}
-                        className="flex-1 bg-primary-900 text-white px-4 py-2 rounded-lg font-semibold text-center hover:bg-primary-800 transition-colors flex items-center justify-center gap-2"
-                      >
-                        <Github className="w-4 h-4" />
-                        Code
-                      </a>
-                    </div>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                 </div>
                 <div className="p-6">
-                  <span className="text-sm text-primary-600 font-semibold">
+                  <span className="text-sm text-neutral-400 font-semibold uppercase tracking-wide">
                     {project.category}
                   </span>
-                  <h3 className="text-2xl font-bold mt-2 mb-3 text-primary-900">
+                  <h3 className="text-2xl font-bold mt-2 mb-3 text-white tracking-tight">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <p className="text-neutral-400 mb-4 leading-relaxed">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium"
+                        className="px-3 py-1 bg-white/5 border border-white/10 text-neutral-300 rounded-full text-sm font-medium"
                       >
                         {tag}
                       </span>

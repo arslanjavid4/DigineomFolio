@@ -44,7 +44,7 @@ const projects = [
 
 export default function PortfolioPreview() {
   return (
-    <section className="section-padding bg-black text-white">
+    <section className="section-padding">
       <div className="container-custom">
         <Gallery4
           title="Explore the Projects"
@@ -55,7 +55,7 @@ export default function PortfolioPreview() {
         <div className="text-center mt-12">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 text-white rounded-full font-semibold hover:bg-primary-700 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-semibold hover:bg-white/90 transition-all shadow-lg hover:shadow-xl"
           >
             View All Projects
             <ArrowRight className="w-5 h-5" />

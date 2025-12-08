@@ -77,7 +77,7 @@ const team = [
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#050505] relative">
       <Navigation />
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -87,10 +87,10 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-primary-900">
-              About <span className="text-primary-600">DigiNeom</span>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white tracking-tight">
+              About <span className="gradient-text">DigiNeom</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-neutral-400 max-w-3xl mx-auto">
               We are a passionate team of developers, designers, and strategists
               dedicated to creating exceptional digital experiences.
             </p>
@@ -106,17 +106,17 @@ export default function About() {
           >
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-primary-900">
+                <h2 className="text-3xl font-bold mb-6 text-white tracking-tight">
                   Our Story
                 </h2>
-                <p className="text-gray-600 leading-relaxed mb-4">
+                <p className="text-neutral-400 leading-relaxed mb-4">
                   Founded in 2020, DigiNeom emerged from a simple belief: that
                   every business deserves access to world-class digital
                   solutions. What started as a small team of passionate
                   developers has grown into a full-service agency serving
                   clients across the globe.
                 </p>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-neutral-400 leading-relaxed">
                   We've helped startups launch their first products, enabled
                   enterprises to transform their digital presence, and
                   everything in between. Our commitment to innovation, quality,
@@ -124,37 +124,37 @@ export default function About() {
                   growth.
                 </p>
               </div>
-              <div className="bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl p-8">
+              <div className="glass-card-hover p-8">
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary-900 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                    <div className="w-12 h-12 bg-white/10 border border-white/10 rounded-lg flex items-center justify-center text-white font-bold text-xl">
                       2020
                     </div>
                     <div>
-                      <h3 className="font-bold text-primary-900">Founded</h3>
-                      <p className="text-gray-600 text-sm">
+                      <h3 className="font-bold text-white">Founded</h3>
+                      <p className="text-neutral-400 text-sm">
                         Started with a vision
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary-900 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                    <div className="w-12 h-12 bg-white/10 border border-white/10 rounded-lg flex items-center justify-center text-white font-bold text-xl">
                       50+
                     </div>
                     <div>
-                      <h3 className="font-bold text-primary-900">Team Members</h3>
-                      <p className="text-gray-600 text-sm">
+                      <h3 className="font-bold text-white">Team Members</h3>
+                      <p className="text-neutral-400 text-sm">
                         Talented professionals
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary-900 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                    <div className="w-12 h-12 bg-white/10 border border-white/10 rounded-lg flex items-center justify-center text-white font-bold text-xl">
                       100+
                     </div>
                     <div>
-                      <h3 className="font-bold text-primary-900">Projects</h3>
-                      <p className="text-gray-600 text-sm">
+                      <h3 className="font-bold text-white">Projects</h3>
+                      <p className="text-neutral-400 text-sm">
                         Successfully delivered
                       </p>
                     </div>
@@ -172,7 +172,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="mb-20"
           >
-            <h2 className="text-3xl font-bold text-center mb-12 text-primary-900">
+            <h2 className="text-3xl font-bold text-center mb-12 text-white tracking-tight">
               By The Numbers
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -187,13 +187,13 @@ export default function About() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="text-center"
                   >
-                    <div className="bg-primary-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Icon className="text-3xl text-primary-900" />
+                    <div className="bg-white/10 border border-white/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Icon className="text-3xl text-white" />
                     </div>
-                    <div className="text-4xl md:text-5xl font-bold text-primary-900 mb-2">
+                    <div className="text-4xl md:text-5xl font-bold text-white mb-2">
                       {stat.value}
                     </div>
-                    <div className="text-gray-600 font-medium">{stat.label}</div>
+                    <div className="text-neutral-400 font-medium">{stat.label}</div>
                   </motion.div>
                 )
               })}
@@ -208,10 +208,10 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="mb-20"
           >
-            <h2 className="text-3xl font-bold text-center mb-12 text-primary-900">
+            <h2 className="text-3xl font-bold text-center mb-12 text-white tracking-tight">
               Our Values
             </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {values.map((value, index) => {
                 const Icon = value.icon
                 return (
@@ -221,15 +221,15 @@ export default function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="bg-gradient-to-br from-primary-50 to-white p-6 rounded-xl border border-primary-100"
+                    className="glass-card-hover p-6"
                   >
-                    <div className="bg-primary-900 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <div className="bg-white/10 border border-white/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
                       <Icon className="text-2xl text-white" />
                     </div>
-                    <h4 className="text-xl font-bold mb-3 text-primary-900">
+                    <h4 className="text-xl font-bold mb-3 text-white tracking-tight">
                       {value.title}
                     </h4>
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-neutral-400 leading-relaxed">
                       {value.description}
                     </p>
                   </motion.div>
@@ -245,7 +245,7 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold text-center mb-12 text-primary-900">
+            <h2 className="text-3xl font-bold text-center mb-12 text-white tracking-tight">
               Meet The Team
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -258,7 +258,7 @@ export default function About() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="relative w-48 h-48 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-100">
+                  <div className="relative w-48 h-48 mx-auto mb-4 rounded-full overflow-hidden border-4 border-white/10">
                     <Image
                       src={member.image}
                       alt={member.name}
@@ -266,10 +266,10 @@ export default function About() {
                       className="object-cover"
                     />
                   </div>
-                  <h3 className="text-xl font-bold mb-1 text-primary-900">
+                  <h3 className="text-xl font-bold mb-1 text-white tracking-tight">
                     {member.name}
                   </h3>
-                  <p className="text-gray-600">{member.role}</p>
+                  <p className="text-neutral-400">{member.role}</p>
                 </motion.div>
               ))}
             </div>

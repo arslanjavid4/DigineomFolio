@@ -2,14 +2,16 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ShimmerButton } from '@/components/ui/shimmer-button'
 import { ArrowRight } from 'lucide-react'
 import { Balancer } from 'react-wrap-balancer'
 
 export default function CTA() {
   return (
-    <section className="section-padding bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 text-white">
-      <div className="container-custom">
+    <section className="section-padding relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-white/2 to-transparent" />
+      
+      <div className="container-custom relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -17,29 +19,26 @@ export default function CTA() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">
             <Balancer>
               Ready to Transform Your Digital Presence?
             </Balancer>
           </h2>
-          <p className="text-xl text-white/90 mb-10 leading-relaxed">
+          <p className="text-xl text-neutral-400 mb-10 leading-relaxed">
             <Balancer>
               Let's discuss how we can help bring your vision to life and drive real results for your business.
             </Balancer>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link href="/contact">
-              <ShimmerButton
-                className="px-8 py-4 text-lg"
-                background="rgba(255, 255, 255, 0.2)"
-              >
+              <button className="group px-8 py-4 bg-white text-black rounded-full font-semibold text-lg hover:bg-white/90 transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
                 Get Started Today
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </ShimmerButton>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
             </Link>
             <Link
               href="/projects"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full font-semibold border-2 border-white/20 hover:bg-white/20 transition-all"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white/5 backdrop-blur-sm text-white rounded-full font-semibold border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
             >
               View Our Work
             </Link>
