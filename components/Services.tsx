@@ -1,50 +1,47 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { Code, Palette, Smartphone, Database, Cloud } from 'lucide-react'
+import { cn } from "@/lib/utils";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { Code, Palette, Smartphone, Database, Cloud } from "lucide-react";
+import { motion } from "framer-motion";
 
 const services = [
   {
-    icon: Code,
-    title: 'Web Development',
+    icon: <Code className="h-4 w-4" />,
+    title: "Web Development",
     description:
-      'Custom web applications built with modern frameworks like React, Next.js, and Node.js. Scalable, fast, and secure solutions.',
-    spanClass: 'col-span-1 md:col-span-1 lg:col-span-1',
-    gradient: 'from-blue-500/20 to-cyan-500/20',
+      "Custom web applications built with modern frameworks like React, Next.js, and Node.js. Scalable, fast, and secure solutions.",
+    area: "md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]",
   },
   {
-    icon: Palette,
-    title: 'UI/UX Design',
+    icon: <Palette className="h-4 w-4" />,
+    title: "UI/UX Design",
     description:
-      'User-centered design that combines aesthetics with functionality. We create intuitive interfaces that drive engagement.',
-    spanClass: 'col-span-1 md:col-span-1 lg:col-span-1',
-    gradient: 'from-purple-500/20 to-pink-500/20',
+      "User-centered design that combines aesthetics with functionality. We create intuitive interfaces that drive engagement.",
+    area: "md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]",
   },
   {
-    icon: Smartphone,
-    title: 'Mobile Development',
+    icon: <Smartphone className="h-4 w-4" />,
+    title: "Mobile Development",
     description:
-      'Native iOS and Android apps, plus cross-platform solutions using React Native and Flutter for maximum reach.',
-    spanClass: 'col-span-1 md:col-span-1 lg:col-span-1',
-    gradient: 'from-green-500/20 to-emerald-500/20',
+      "Native iOS and Android apps, plus cross-platform solutions using React Native and Flutter for maximum reach.",
+    area: "md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]",
   },
   {
-    icon: Database,
-    title: 'Backend Development',
+    icon: <Database className="h-4 w-4" />,
+    title: "Backend Development",
     description:
-      'Robust server-side solutions with RESTful APIs, microservices architecture, and cloud-native applications.',
-    spanClass: 'col-span-1 md:col-span-2 lg:col-span-2',
-    gradient: 'from-orange-500/20 to-red-500/20',
+      "Robust server-side solutions with RESTful APIs, microservices architecture, and cloud-native applications.",
+    area: "md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]",
   },
   {
-    icon: Cloud,
-    title: 'Cloud Solutions',
+    icon: <Cloud className="h-4 w-4" />,
+    title: "Cloud Solutions",
     description:
-      'AWS, Azure, and GCP expertise. We help you migrate, scale, and optimize your infrastructure in the cloud.',
-    spanClass: 'col-span-1 md:col-span-1 lg:col-span-1',
-    gradient: 'from-indigo-500/20 to-blue-500/20',
+      "AWS, Azure, and GCP expertise. We help you migrate, scale, and optimize your infrastructure in the cloud.",
+    area: "md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]",
   },
-]
+];
 
 export default function Services() {
   return (
@@ -64,40 +61,57 @@ export default function Services() {
             Comprehensive digital solutions to elevate your business
           </p>
         </motion.div>
-
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => {
-            const Icon = service.icon
-            return (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`${service.spanClass} glass-card-hover p-8 relative overflow-hidden group`}
-              >
-                {/* Gradient overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                
-                {/* Noise texture */}
-                <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjkiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjYSkiIG9wYWNpdHk9Ii4wNSIvPjwvc3ZnPg==')] pointer-events-none" />
-                
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/20 transition-colors">
-                    <Icon className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3 text-white tracking-tight">{service.title}</h3>
-                  <p className="text-neutral-400 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-              </motion.div>
-            )
-          })}
-        </div>
+        <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
+          {services.map((service) => (
+            <GridItem
+              key={service.title}
+              area={service.area}
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+            />
+          ))}
+        </ul>
       </div>
     </section>
-  )
+  );
 }
+
+interface GridItemProps {
+  area: string;
+  icon: React.ReactNode;
+  title: string;
+  description: React.ReactNode;
+}
+
+const GridItem = ({ area, icon, title, description }: GridItemProps) => {
+  return (
+    <li className={cn("min-h-[14rem] list-none", area)}>
+      <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
+        <GlowingEffect
+          spread={40}
+          glow={true}
+          disabled={false}
+          proximity={64}
+          inactiveZone={0.01}
+          borderWidth={3}
+        />
+        <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
+          <div className="relative flex flex-1 flex-col justify-between gap-3">
+            <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
+              {icon}
+            </div>
+            <div className="space-y-3">
+              <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
+                {title}
+              </h3>
+              <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground">
+                {description}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  );
+};
