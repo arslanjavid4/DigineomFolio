@@ -8,7 +8,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "#050505", // Manually set to match global css body
+        foreground: "#ffffff", // Manually set to match likely text color
         primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
           50: '#e3f2fd',
           100: '#bbdefb',
           200: '#90caf9',
@@ -20,6 +27,30 @@ module.exports = {
           800: '#1565c0',
           900: '#0d47a1',
         },
+        secondary: {
+          DEFAULT: "#262626", // Dark gray for secondary buttons
+          foreground: "#ffffff",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "#171717",
+          foreground: "#737373",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -30,6 +61,8 @@ module.exports = {
         "shimmer-slide": "shimmer-slide var(--speed) ease-in-out infinite alternate",
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
         "spotlight": "spotlight 2s ease .75s 1 forwards",
+        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+        "fade-in-up": "slideUp 0.5s ease-out forwards",
       },
       keyframes: {
         fadeIn: {
@@ -62,6 +95,10 @@ module.exports = {
         "autoplay-progress": {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(100%)" },
+        },
+        "marquee-vertical": {
+          "from": { transform: "translateY(0)" },
+          "to": { transform: "translateY(-100%)" },
         },
       },
     },

@@ -4,6 +4,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Timeline } from '@/components/ui/timeline';
 import TeamSection from '@/components/TeamSection';
+import AboutHero from '@/components/AboutHero';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
@@ -111,27 +112,12 @@ export default function AboutPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="pt-40 pb-20 relative overflow-hidden">
+      <section className="pt-32 pb-20 relative overflow-hidden">
         {/* Background elements */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-primary/20 blur-[120px] rounded-full pointer-events-none opacity-20" />
 
-        <div className="container-custom relative z-10 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight"
-          >
-            Obsessed with <span className="gradient-text">Perfection.</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-neutral-400 max-w-2xl mx-auto"
-          >
-            We are a team of 50+ engineers, designers, and thinkers.
-          </motion.p>
+        <div className="container-custom relative z-10">
+          <AboutHero />
         </div>
       </section>
 

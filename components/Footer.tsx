@@ -1,49 +1,63 @@
-'use client'
+"use client";
 
-import { Github, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { HighlightGroup, HighlighterItem } from '@/components/ui/highlighter'
+import {
+  Github,
+  Twitter,
+  Linkedin,
+  Instagram,
+  Mail,
+} from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { TextHoverEffect } from "@/components/ui/text-hover-effect";
+
+export const FooterBackgroundGradient = () => {
+  return (
+    <div
+      className="absolute inset-0 z-0 pointer-events-none"
+      style={{
+        background:
+          "radial-gradient(125% 125% at 50% 10%, #0F0F1166 50%, #3ca2fa33 100%)",
+      }}
+    />
+  );
+};
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-  ]
+    { icon: Github, href: "#", label: "GitHub" },
+    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Instagram, href: "#", label: "Instagram" },
+  ];
 
   const footerLinks = {
     Company: [
-      { name: 'About Us', href: '/about' },
-      { name: 'Services', href: '/#services' },
-      { name: 'Portfolio', href: '/projects' },
-      { name: 'Contact', href: '/contact' },
+      { name: "About Us", href: "/about" },
+      { name: "Services", href: "/#services" },
+      { name: "Portfolio", href: "/projects" },
+      { name: "Contact", href: "/contact" },
     ],
     Resources: [
-      { name: 'Blog', href: '#' },
-      { name: 'Case Studies', href: '#' },
-      { name: 'Documentation', href: '#' },
-      { name: 'Support', href: '#' },
+      { name: "Blog", href: "#" },
+      { name: "Case Studies", href: "#" },
+      { name: "Documentation", href: "#" },
+      { name: "Support", href: "#" },
     ],
     Legal: [
-      { name: 'Privacy Policy', href: '#' },
-      { name: 'Terms of Service', href: '#' },
-      { name: 'Cookie Policy', href: '#' },
+      { name: "Privacy Policy", href: "#" },
+      { name: "Terms of Service", href: "#" },
+      { name: "Cookie Policy", href: "#" },
     ],
-  }
-
-  const contactInfo = [
-    { icon: Mail, text: 'info@digineo.co', href: 'mailto:info@digineo.co' },
-    { icon: Phone, text: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-    { icon: MapPin, text: '123 Tech Street, Digital City', href: '#' },
-  ]
+  };
 
   return (
-    <footer className="border-t border-white/10 bg-gradient-to-b from-transparent to-black/20">
-      <div className="container-custom py-16 px-4 sm:px-6 lg:px-8">
+    <footer className="relative overflow-hidden border-t border-white/10 bg-black text-neutral-400">
+      <FooterBackgroundGradient />
+
+      <div className="relative z-10 container-custom py-16 px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-1">
@@ -56,13 +70,13 @@ export default function Footer() {
                 className="h-10 w-auto"
               />
             </Link>
-            <p className="text-neutral-400 mb-6 leading-relaxed text-sm">
-              Creating exceptional digital experiences through innovative
-              software development and cutting-edge web design.
+            <p className="mb-6 leading-relaxed text-sm text-neutral-400">
+              Creating exceptional digital experiences through innovative software
+              development and cutting-edge web design.
             </p>
             <div className="flex space-x-3">
               {socialLinks.map((social) => {
-                const Icon = social.icon
+                const Icon = social.icon;
                 return (
                   <a
                     key={social.label}
@@ -72,7 +86,7 @@ export default function Footer() {
                   >
                     <Icon size={16} />
                   </a>
-                )
+                );
               })}
             </div>
           </div>
@@ -80,7 +94,9 @@ export default function Footer() {
           {/* Links Columns */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="text-white font-semibold mb-4 text-sm tracking-wide uppercase">{category}</h4>
+              <h4 className="text-white font-semibold mb-4 text-sm tracking-wide uppercase">
+                {category}
+              </h4>
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.name}>
@@ -99,33 +115,20 @@ export default function Footer() {
 
         {/* Contact Info */}
         <div className="border-t border-white/10 pt-8 mb-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-6">
-              {contactInfo.map((info, index) => {
-                const Icon = info.icon
-                return (
-                  <a
-                    key={index}
-                    href={info.href}
-                    className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors text-sm group"
-                  >
-                    <Icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span>{info.text}</span>
-                  </a>
-                )
-              })}
-            </div>
-            {/* Center Contact Icon */}
-            <div className="flex justify-center">
-              <Link
-                href="/contact"
-                className="w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all text-neutral-400 hover:text-white"
-                aria-label="Contact Us"
-              >
-                <Mail className="w-5 h-5" />
-              </Link>
-            </div>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-center gap-4 text-center">
+            <a
+              href="mailto:info@digineom.solutions"
+              className="flex items-center justify-center gap-2 text-neutral-400 hover:text-white transition-colors text-sm group"
+            >
+              <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span>info@digineom.solutions</span>
+            </a>
           </div>
+        </div>
+
+        {/* Large Text Effect */}
+        <div className="w-full h-auto mt-10">
+          <TextHoverEffect text="DIGINEOM" />
         </div>
 
         {/* Bottom Bar */}
@@ -139,5 +142,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

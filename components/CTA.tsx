@@ -1,51 +1,156 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import { Balancer } from 'react-wrap-balancer'
+import { cn } from "@/lib/utils";
+import { ReactNode, useEffect, useRef } from "react";
+import Link from 'next/link';
 
-export default function CTA() {
-  return (
-    <section className="section-padding relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-white/2 to-transparent" />
-      
-      <div className="container-custom relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">
-            <Balancer>
-              Ready to Transform Your Digital Presence?
-            </Balancer>
-          </h2>
-          <p className="text-xl text-neutral-400 mb-10 leading-relaxed">
-            <Balancer>
-              Let's discuss how we can help bring your vision to life and drive real results for your business.
-            </Balancer>
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href="/contact">
-              <button className="group px-8 py-4 bg-white text-black rounded-full font-semibold text-lg hover:bg-white/90 transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
-                Get Started Today
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </Link>
-            <Link
-              href="/projects"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white/5 backdrop-blur-sm text-white rounded-full font-semibold border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
-            >
-              View Our Work
-            </Link>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  )
+interface VerticalMarqueeProps {
+  children: ReactNode;
+  pauseOnHover?: boolean;
+  reverse?: boolean;
+  className?: string;
+  speed?: number;
+  onItemsRef?: (items: HTMLElement[]) => void;
 }
 
+function VerticalMarquee({
+  children,
+  pauseOnHover = false,
+  reverse = false,
+  className,
+  speed = 30,
+  onItemsRef,
+}: VerticalMarqueeProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (onItemsRef && containerRef.current) {
+      const items = Array.from(containerRef.current.querySelectorAll('.marquee-item')) as HTMLElement[];
+      onItemsRef(items);
+    }
+  }, [onItemsRef]);
+
+  return (
+    <div
+      ref={containerRef}
+      className={cn(
+        "group flex flex-col overflow-hidden",
+        className
+      )}
+      style={
+        {
+          "--duration": `${speed}s`,
+        } as React.CSSProperties
+      }
+    >
+      <div
+        className={cn(
+          "flex shrink-0 flex-col animate-marquee-vertical",
+          reverse && "[animation-direction:reverse]",
+          pauseOnHover && "group-hover:[animation-play-state:paused]"
+        )}
+      >
+        {children}
+      </div>
+      <div
+        className={cn(
+          "flex shrink-0 flex-col animate-marquee-vertical",
+          reverse && "[animation-direction:reverse]",
+          pauseOnHover && "group-hover:[animation-play-state:paused]"
+        )}
+        aria-hidden="true"
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+const marqueeItems = [
+  "Web Development",
+  "UI/UX Design",
+  "Mobile Apps",
+  "Cloud Solutions",
+  "Digital Strategy",
+  "Backend Systems",
+];
+
+export default function CTA() {
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const marqueeContainer = marqueeRef.current;
+    if (!marqueeContainer) return;
+
+    const updateOpacity = () => {
+      const items = marqueeContainer.querySelectorAll('.marquee-item');
+      const containerRect = marqueeContainer.getBoundingClientRect();
+      const centerY = containerRect.top + containerRect.height / 2;
+
+      items.forEach((item) => {
+        const itemRect = item.getBoundingClientRect();
+        const itemCenterY = itemRect.top + itemRect.height / 2;
+        const distance = Math.abs(centerY - itemCenterY);
+        const maxDistance = containerRect.height / 2;
+        const normalizedDistance = Math.min(distance / maxDistance, 1);
+        const opacity = 1 - normalizedDistance * 0.75;
+        (item as HTMLElement).style.opacity = opacity.toString();
+      });
+    };
+
+    const animationFrame = () => {
+      updateOpacity();
+      requestAnimationFrame(animationFrame);
+    };
+
+    const frame = requestAnimationFrame(animationFrame);
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  return (
+    <div className="min-h-screen text-foreground flex items-center justify-center px-6 py-12 overflow-hidden">
+      <div className="w-full max-w-7xl animate-fade-in-up">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+          {/* Left Content */}
+          <div className="space-y-8 max-w-xl">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium leading-tight tracking-tight text-foreground animate-fade-in-up [animation-delay:200ms]">
+              Ready to Transform Your Digital Presence?
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed animate-fade-in-up [animation-delay:400ms]">
+              Let's discuss how we can help bring your vision to life and drive real results for your business.
+            </p>
+            <div className="flex flex-wrap gap-4 animate-fade-in-up [animation-delay:600ms]">
+              <Link href="/contact" className="group relative px-6 py-3 bg-foreground text-background rounded-md font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg inline-block text-center">
+                <span className="relative z-10">Get Solutions</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+              </Link>
+              <Link href="/projects" className="group relative px-6 py-3 bg-secondary text-secondary-foreground rounded-md font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg border border-border inline-block text-center">
+                <span className="relative z-10">View Our Work</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-foreground/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Marquee */}
+          <div ref={marqueeRef} className="relative h-[600px] lg:h-[700px] flex items-center justify-center animate-fade-in-up [animation-delay:400ms]">
+            <div className="relative w-full h-full">
+              <VerticalMarquee speed={20} className="h-full">
+                {marqueeItems.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-tight py-8 marquee-item"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </VerticalMarquee>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
