@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { Mail, Phone, MapPin, Send } from 'lucide-react'
+import { Mail, Send } from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -32,20 +32,8 @@ export default function Contact() {
     {
       icon: Mail,
       title: 'Email',
-      content: 'hello@digineom.com',
-      link: 'mailto:hello@digineom.com',
-    },
-    {
-      icon: Phone,
-      title: 'Phone',
-      content: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
-    },
-    {
-      icon: MapPin,
-      title: 'Location',
-      content: '123 Tech Street, Digital City',
-      link: '#',
+      content: 'info@digineom.co',
+      link: 'mailto:info@digineom.co',
     },
   ]
 
@@ -80,8 +68,7 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
               <p className="text-gray-600 mb-8">
-                We're here to help! Reach out to us through any of these
-                channels.
+                We&apos;re here to help. Reach out by email.
               </p>
             </div>
 

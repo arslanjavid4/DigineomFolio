@@ -19,7 +19,7 @@ export default function PortfolioPreview() {
         >
           <div>
             <p className="eyebrow mb-5 text-[#003c33]">Selected work</p>
-            <h2 className="display text-6xl md:text-8xl">Four products.<br />Four real problems.</h2>
+            <h2 className="display text-6xl md:text-8xl">Real problems.<br />Measurable outcomes.</h2>
           </div>
           <Link href="/projects" className="pill border border-[#17171c] hover:bg-white">All projects <ArrowRight size={16} /></Link>
         </motion.div>
@@ -32,7 +32,7 @@ export default function PortfolioPreview() {
               </div>
               <div className="grid grid-cols-[1fr_auto] border-t border-[#17171c] pt-4">
                 <div>
-                  <p className="eyebrow mb-2 text-neutral-500">0{index + 1} / {project.category}</p>
+                  <p className="eyebrow mb-2 text-neutral-500">{project.category}</p>
                   <h3 className="text-4xl font-semibold tracking-[-0.05em]">{project.title}</h3>
                 </div>
                 <ArrowUpRight className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />

@@ -54,7 +54,7 @@ export default function AboutPage() {
         <div>
           <h4 className="text-2xl font-bold text-white mb-2">Scaling the Team</h4>
           <p className="text-neutral-400 mb-6">
-            Expanded to 20 employees. Opened our HQ in the tech district. Launched our internal design system.
+            Expanded the team and launched our internal design system.
           </p>
           <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10">
             <Image
@@ -128,7 +128,7 @@ export default function AboutPage() {
             {[
               ['2020', 'The Inception', 'DigiNeom was born in a garage. No VC money. Just two laptops and a belief that software could be better.'],
               ['2021', 'First Major Win', 'Secured our first Fortune 500 client. Delivered a complete cloud migration in record time.'],
-              ['2022', 'Scaling the Team', 'Expanded to 20 employees. Opened our HQ in the tech district. Launched our internal design system.'],
+              ['2022', 'Scaling the Team', 'Expanded the team and launched our internal design system.'],
               ['2023', 'Global Reach', 'Projects delivered in 15 countries. Revenue hit 8 figures. Became an official AWS partner.'],
               ['2024', 'The AI Revolution', 'Pivoted to AI-first development. Integrated LLMs into 80% of client workflows.'],
             ].map(([year, title, copy]) => (

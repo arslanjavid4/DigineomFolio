@@ -21,7 +21,7 @@ export default function Projects() {
             className="mb-20 grid gap-8 border-b pb-12 lg:grid-cols-[1fr_2fr] lg:items-end"
           >
             <p className="eyebrow text-[#003c33]">Work / 2022—2024</p>
-            <div><h1 className="display text-7xl md:text-9xl">Selected projects.</h1><p className="mt-8 max-w-2xl text-xl text-neutral-600">Four product stories spanning fintech, commerce, DeFi, and AI-powered platforms.</p></div>
+            <div><h1 className="display text-7xl md:text-9xl">Selected projects.</h1><p className="mt-8 max-w-2xl text-xl text-neutral-600">Product stories spanning fintech, commerce, DeFi, and AI-powered platforms.</p></div>
           </motion.div>
 
           <div>
@@ -32,9 +32,8 @@ export default function Projects() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="grid gap-6 md:grid-cols-[64px_1fr_1fr_32px] md:items-center"
+                  className="grid gap-6 md:grid-cols-[1fr_1fr_32px] md:items-center"
                 >
-                  <span className="font-mono text-xs text-neutral-500">0{index + 1}</span>
                   <div><h2 className="text-5xl font-semibold tracking-[-0.055em] md:text-7xl">{project.title}</h2><p className="eyebrow mt-3 text-[#1863dc]">{project.category} / {project.year}</p></div>
                   <div className="relative aspect-[16/10] overflow-hidden rounded-[14px] bg-[#eeece7]"><Image src={project.image} alt={project.title} fill className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" /></div>
                   <ArrowUpRight className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
