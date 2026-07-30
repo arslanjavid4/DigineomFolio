@@ -1,43 +1,22 @@
 'use client'
 
-import { motion } from 'framer-motion'
-
-// Mock company logos - using text placeholders, replace with actual logos
-const companies = [
-  'TechCorp', 'CloudVault', 'BrandFlow', 'DataSync', 'InnovateLab', 'DigitalEdge'
+const stats = [
+  ['04', 'Featured case studies'],
+  ['05', 'Core capabilities'],
+  ['2020', 'Studio founded'],
+  ['Global', 'Digital delivery'],
 ]
 
 export default function ClientsStats() {
   return (
-    <section className="section-padding border-b border-white/10">
+    <section className="border-y border-[#d9d9dd]">
       <div className="container-custom">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <p className="text-sm text-neutral-500 uppercase tracking-wider mb-8">
-            Trusted by Industry Leaders
-          </p>
-        </motion.div>
-
-        {/* Ticker/Grid Layout */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-          {companies.map((company, index) => (
-            <motion.div
-              key={company}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-center justify-center"
-            >
-              <div className="text-neutral-500 opacity-50 hover:opacity-100 transition-opacity duration-300 text-lg font-medium">
-                {company}
-              </div>
-            </motion.div>
+        <div className="grid grid-cols-2 md:grid-cols-4">
+          {stats.map(([value, label]) => (
+            <div key={label} className="border-r border-[#d9d9dd] p-5 last:border-r-0 sm:p-8">
+              <div className="mb-2 text-3xl font-semibold tracking-[-0.05em] md:text-5xl">{value}</div>
+              <div className="eyebrow text-neutral-500">{label}</div>
+            </div>
           ))}
         </div>
       </div>

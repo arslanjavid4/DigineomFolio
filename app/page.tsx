@@ -1,60 +1,30 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import ClientsStats from '@/components/ClientsStats';
 import Services from '@/components/Services';
-import Process from '@/components/Process';
 import PortfolioPreview from '@/components/PortfolioPreview';
-import Reviews from '@/components/Reviews';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
-import { Preloader } from '@/components/ui/preloader';
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <main className="min-h-screen bg-[#050505] relative">
-      <AnimatePresence mode="wait">
-        {loading && (
-          <motion.div
-            key="preloader"
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-[100]"
-          >
-            <Preloader />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Subtle radial gradient glow at top center */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 50%, transparent 100%)'
-          }}
-        />
-      </div>
+    <main className="min-h-screen bg-white">
       <Navigation />
       <Hero />
       <ClientsStats />
       <Services />
+      <section className="section-padding bg-[#003c33] text-white">
+        <div className="container-custom grid gap-12 lg:grid-cols-[1fr_2fr]">
+          <p className="eyebrow text-[#a9e8cc]">How we work</p>
+          <div>
+            <h2 className="display max-w-5xl text-6xl md:text-8xl">Clarity before complexity.</h2>
+            <p className="mt-10 max-w-2xl text-xl leading-relaxed text-white/75">
+              We move from discovery and strategy through product design, agile development, quality assurance, and launch—keeping every decision tied to the people it serves.
+            </p>
+          </div>
+        </div>
+      </section>
       <PortfolioPreview />
-      <Process />
-      <Reviews />
       <CTA />
       <Footer />
     </main>

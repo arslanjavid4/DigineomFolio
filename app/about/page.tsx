@@ -108,24 +108,38 @@ export default function AboutPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#050505] relative">
+    <main className="min-h-screen bg-white">
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
-        {/* Background elements */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-primary/20 blur-[120px] rounded-full pointer-events-none opacity-20" />
-
-        <div className="container-custom relative z-10">
-          <AboutHero />
+      <section className="section-padding">
+        <div className="container-custom grid gap-8 border-b pb-14 lg:grid-cols-[1fr_2fr] lg:items-end">
+          <p className="eyebrow text-[#003c33]">About DigiNeom</p>
+          <div>
+            <h1 className="display text-7xl md:text-9xl">Small studio.<br />Expansive thinking.</h1>
+            <p className="mt-9 max-w-3xl text-xl leading-relaxed text-neutral-600 md:text-2xl">We create exceptional digital experiences through innovative software development and cutting-edge web design.</p>
+          </div>
         </div>
       </section>
 
-      {/* Timeline Section */}
-      <Timeline data={timelineData} />
-
-      {/* Team Section */}
-      <TeamSection />
+      <section className="section-padding bg-[#edfce9]">
+        <div className="container-custom grid gap-12 lg:grid-cols-[1fr_2fr]">
+          <p className="eyebrow text-[#003c33]">Our story / 2020—24</p>
+          <div>
+            {[
+              ['2020', 'The Inception', 'DigiNeom was born in a garage. No VC money. Just two laptops and a belief that software could be better.'],
+              ['2021', 'First Major Win', 'Secured our first Fortune 500 client. Delivered a complete cloud migration in record time.'],
+              ['2022', 'Scaling the Team', 'Expanded to 20 employees. Opened our HQ in the tech district. Launched our internal design system.'],
+              ['2023', 'Global Reach', 'Projects delivered in 15 countries. Revenue hit 8 figures. Became an official AWS partner.'],
+              ['2024', 'The AI Revolution', 'Pivoted to AI-first development. Integrated LLMs into 80% of client workflows.'],
+            ].map(([year, title, copy]) => (
+              <article key={year} className="grid gap-5 border-t border-[#003c33]/30 py-8 md:grid-cols-[100px_1fr]">
+                <span className="font-mono text-sm text-[#003c33]">{year}</span>
+                <div><h2 className="text-3xl font-semibold tracking-[-0.04em] md:text-5xl">{title}</h2><p className="mt-4 max-w-2xl text-lg leading-relaxed text-neutral-600">{copy}</p></div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </main>

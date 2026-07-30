@@ -246,7 +246,7 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
       onMouseMove={handleMouseMove}
       style={{ "--x": useMotionTemplate`${mouseX}px`, "--y": useMotionTemplate`${mouseY}px` } as WrapperStyle}
     >
-      <div className="relative w-full overflow-hidden rounded-3xl border border-neutral-200 bg-white transition-colors duration-300 dark:border-neutral-800 dark:bg-neutral-900">
+      <div className="relative w-full overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/50 backdrop-blur-sm transition-colors duration-300">
         <div className="m-10 min-h-[450px] w-full">
           <AnimatePresence mode="wait">
             <motion.div
@@ -258,7 +258,7 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
               <motion.div
-                className="text-sm font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-500"
+                className="text-sm font-semibold uppercase tracking-wider text-sky-500"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.05, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -266,7 +266,7 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
                 {steps[step].name}
               </motion.div>
               <motion.h2
-                className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 md:text-3xl"
+                className="text-2xl font-bold tracking-tight text-white md:text-3xl"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -278,7 +278,7 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.15, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               >
-                <p className="text-base leading-relaxed text-neutral-700 dark:text-neutral-400">
+                <p className="text-base leading-relaxed text-neutral-400">
                   {steps[step].description}
                 </p>
               </motion.div>
@@ -324,7 +324,7 @@ function StepsNav({ steps: stepItems, current, onChange }: { steps: readonly Ste
                     <span>{stepIdx + 1}</span>
                   )}
                 </span>
-                <span className="hidden sm:inline-block">{step.name}</span>
+                <span className="hidden sm:inline-block">{step.title}</span>
               </button>
             </motion.li>
           );
@@ -404,14 +404,14 @@ function FeatureCarousel({
 
 export default function Process() {
   const images = {
-    step1img1: placeholderImage("Discovery 1"),
-    step1img2: placeholderImage("Discovery 2"),
-    step2img1: placeholderImage("Strategy 1"),
-    step2img2: placeholderImage("Strategy 2"),
-    step3img: placeholderImage("Design"),
-    step4img: placeholderImage("Development"),
-    step5img: placeholderImage("QA"),
-    step6img: placeholderImage("Launch"),
+    step1img1: "/Images/process/discovery_analytics.png",
+    step1img2: "/Images/process/discovery_brainstorm.png",
+    step2img1: "/Images/process/strategy_roadmap.png",
+    step2img2: "/Images/process/strategy_wireframes.png",
+    step3img: "/Images/process/ui_design.png",
+    step4img: "/Images/process/development.png",
+    step5img: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&q=80&w=800",
+    step6img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800",
     alt: "Process Visualization"
   };
 

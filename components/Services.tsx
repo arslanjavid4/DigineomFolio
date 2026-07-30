@@ -45,33 +45,35 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="section-padding">
+    <section id="services" className="section-padding">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16 grid gap-6 border-t pt-6 md:grid-cols-2"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white tracking-tight">
-            Our <span className="gradient-text">Services</span>
+          <p className="eyebrow text-[#003c33]">Capabilities / 01—05</p>
+          <h2 className="display text-5xl md:text-7xl">
+            From first thought to final product.
           </h2>
-          <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
-            Comprehensive digital solutions to elevate your business
-          </p>
         </motion.div>
-        <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
-          {services.map((service) => (
-            <GridItem
+        <div>
+          {services.map((service, index) => (
+            <motion.article
               key={service.title}
-              area={service.area}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-            />
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="group grid gap-5 border-t py-7 md:grid-cols-[90px_1fr_1fr] md:items-start md:py-10"
+            >
+              <span className="font-mono text-xs text-[#1863dc]">0{index + 1}</span>
+              <h3 className="text-3xl font-semibold tracking-[-0.045em] md:text-5xl">{service.title}</h3>
+              <p className="max-w-lg text-base leading-relaxed text-neutral-600 md:text-lg">{service.description}</p>
+            </motion.article>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );

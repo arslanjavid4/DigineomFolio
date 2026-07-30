@@ -4,27 +4,28 @@ import Link from 'next/link';
 
 export default function CTA() {
   return (
-    <div className="min-h-screen text-foreground flex items-center justify-center px-6 py-12 overflow-hidden">
-      <div className="w-full max-w-4xl animate-fade-in-up text-center">
-        <div className="space-y-8 mx-auto">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium leading-tight tracking-tight text-foreground animate-fade-in-up [animation-delay:200ms]">
-            Ready to Transform Your Digital Presence?
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed animate-fade-in-up [animation-delay:400ms] max-w-2xl mx-auto">
-            Let's discuss how we can help bring your vision to life and drive real results for your business.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 animate-fade-in-up [animation-delay:600ms]">
-            <Link href="/contact" className="group relative px-6 py-3 bg-foreground text-background rounded-md font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg inline-block text-center">
-              <span className="relative z-10">Get Solutions</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
-            </Link>
-            <Link href="/projects" className="group relative px-6 py-3 bg-secondary text-secondary-foreground rounded-md font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg border border-border inline-block text-center">
-              <span className="relative z-10">View Our Work</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-foreground/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
-            </Link>
+    <section className="section-padding bg-[#003c33] text-white">
+      <div className="container-custom">
+        <div className="grid gap-10 border-t border-white/25 pt-7 lg:grid-cols-[1fr_2fr]">
+          <p className="eyebrow text-[#a9e8cc]">Have a project?</p>
+          <div>
+            <h2 className="display max-w-5xl text-6xl md:text-8xl lg:text-9xl">
+              Ready to transform your digital presence?
+            </h2>
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/75 md:text-xl">
+              Let&apos;s discuss how thoughtful strategy, design, and development can move your business forward.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link href="/contact" className="pill bg-[#a9e8cc] text-[#003c33] hover:bg-white">
+                Get solutions
+              </Link>
+              <Link href="/projects" className="pill border border-white/40 text-white hover:bg-white hover:text-[#003c33]">
+                View our work
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

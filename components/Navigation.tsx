@@ -1,46 +1,32 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'About', href: '/about' },
+    { name: 'Work', href: '/projects' },
+    { name: 'Capabilities', href: '/#services' },
+    { name: 'Studio', href: '/about' },
   ]
 
   return (
-    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-4">
+    <nav className="sticky top-0 z-50 w-full border-b border-[#d9d9dd] bg-white/95 backdrop-blur">
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={cn(
-          'backdrop-blur-md bg-black/50 border border-white/10 rounded-full px-6 py-4 transition-all duration-300',
-          scrolled && 'bg-black/70 border-white/20'
-        )}
+        transition={{ duration: 0.35 }}
+        className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-2 items-center px-5 sm:px-8 md:grid-cols-3 lg:px-12"
       >
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="inline-flex items-center" aria-label="DigiNeom home">
             <Image
               src="/Images/QVC9EYR2LA7kyLTy3yqvyEimTI.png"
-              alt="DigiNeom"
+              alt="DigiNeom Solutions"
               width={120}
               height={40}
               className="h-8 w-auto"
@@ -48,57 +34,49 @@ export default function Navigation() {
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden items-center justify-center gap-7 md:flex">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="px-4 py-2 text-sm text-neutral-400 hover:text-white transition-colors font-medium rounded-lg hover:bg-white/5"
+                className="text-sm font-medium hover:text-[#1863dc]"
               >
                 {item.name}
               </Link>
             ))}
-            <Link href="/contact">
-              <button className="ml-4 px-6 py-2 bg-white text-black rounded-full font-semibold text-sm hover:bg-white/90 transition-all shadow-lg hover:shadow-xl">
-                Get Solutions
-              </button>
-            </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          <Link href="/contact" className="pill ml-auto hidden bg-[#17171c] text-white hover:bg-[#003c33] md:inline-flex">
+            Start a project <ArrowUpRight size={15} />
+          </Link>
+
           <button
-            className="md:hidden text-white"
+            className="ml-auto md:hidden"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-        </div>
-
-        {/* Mobile Navigation */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4 pt-4 border-t border-white/10 space-y-3"
+              className="absolute left-0 top-[72px] w-full border-b bg-white px-5 py-6 md:hidden"
             >
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-4 py-2 text-neutral-400 hover:text-white transition-colors font-medium rounded-lg hover:bg-white/5"
+                  className="block border-t py-4 text-2xl font-semibold tracking-tight"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Link href="/contact" onClick={() => setIsOpen(false)}>
-                <button className="w-full mt-2 px-6 py-2 bg-white text-black rounded-full font-semibold text-sm hover:bg-white/90 transition-all">
-                  Get Solutions
-                </button>
+              <Link href="/contact" onClick={() => setIsOpen(false)} className="pill mt-5 w-full bg-[#17171c] text-white">
+                Start a project
               </Link>
             </motion.div>
           )}
