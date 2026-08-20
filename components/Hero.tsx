@@ -9,7 +9,7 @@ export default function Hero() {
     <section className="section-padding overflow-hidden pb-16 md:pb-24">
       <div className="container-custom">
         <div className="mb-12 grid gap-8 border-b pb-10 lg:grid-cols-[1fr_2fr] lg:items-end">
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="eyebrow text-[#003c33]">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="eyebrow text-[#1863dc]">
             Independent digital product studio
           </motion.p>
           <motion.h1
@@ -27,7 +27,7 @@ export default function Hero() {
             Big ideas, smart strategies, and endless creativity—translated into useful products, platforms, and brands.
           </p>
           <div className="flex items-start gap-3 lg:justify-end">
-            <Link href="/contact" className="pill bg-[#1863dc] text-white hover:bg-[#003c33]">
+            <Link href="/contact" className="pill bg-[#1863dc] text-white hover:bg-[#0d47a1]">
               Get solutions <ArrowUpRight size={17} />
             </Link>
             <Link href="/projects" className="pill border border-[#17171c] hover:bg-[#eeece7]">

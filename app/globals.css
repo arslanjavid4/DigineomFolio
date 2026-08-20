@@ -5,12 +5,12 @@
 @layer base {
   :root {
     --ink: #17171c;
-    --green: #003c33;
-    --navy: #071829;
     --blue: #1863dc;
+    --blue-deep: #0d47a1;
+    --blue-soft: #c7dbff;
+    --navy: #071829;
     --coral: #ff7759;
     --stone: #eeece7;
-    --pale-green: #edfce9;
     --pale-blue: #f1f5ff;
     --rule: #d9d9dd;
   }

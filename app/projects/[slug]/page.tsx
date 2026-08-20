@@ -269,25 +269,25 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
       </div>
 
       {nextProject && (
-        <section className="border-t bg-[#eeece7] px-5 py-20 sm:px-8 lg:px-12">
+        <section className="border-t border-white/10 bg-[#1863dc] px-5 py-20 text-white sm:px-8 lg:px-12">
           <div className="container-custom">
-            <p className="text-sm uppercase tracking-widest text-neutral-500 mb-4">
+            <p className="mb-4 text-sm uppercase tracking-widest text-[#c7dbff]">
               Next Project
             </p>
             <Link
               href={`/projects/${nextProject.id}`}
-              className="group flex flex-col md:flex-row md:items-center justify-between gap-6"
+              className="group flex flex-col justify-between gap-6 md:flex-row md:items-center"
             >
               <div>
-                <h3 className="text-4xl font-semibold tracking-[-0.05em] transition-colors group-hover:text-[#1863dc] md:text-6xl">
+                <h3 className="text-4xl font-semibold tracking-[-0.05em] transition-colors group-hover:text-[#c7dbff] md:text-6xl">
                   {nextProject.title}
                 </h3>
-                <p className="mt-3 max-w-xl text-neutral-600">{nextProject.description}</p>
-                <span className="mt-4 inline-flex items-center gap-2 text-sm">
+                <p className="mt-3 max-w-xl text-white/75">{nextProject.description}</p>
+                <span className="mt-4 inline-flex items-center gap-2 text-sm text-white/70">
                   {nextProject.category}
                 </span>
               </div>
-              <div className="relative aspect-video w-full overflow-hidden rounded-xl border md:w-64">
+              <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/20 md:w-64">
                 <Image
                   src={nextProject.image}
                   alt={nextProject.title}
@@ -295,7 +295,7 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <ArrowRight className="hidden h-8 w-8 transition-all group-hover:translate-x-1 lg:block" />
+              <ArrowRight className="hidden h-8 w-8 text-white transition-all group-hover:translate-x-1 lg:block" />
             </Link>
           </div>
         </section>

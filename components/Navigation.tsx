@@ -12,7 +12,7 @@ export default function Navigation() {
   const navItems = [
     { name: 'Work', href: '/projects' },
     { name: 'Capabilities', href: '/#services' },
-    { name: 'Studio', href: '/about' },
+    { name: 'Talent Bridge', href: '/about' },
   ]
 
   return (
@@ -46,7 +46,7 @@ export default function Navigation() {
             ))}
           </div>
 
-          <Link href="/contact" className="pill ml-auto hidden bg-[#17171c] text-white hover:bg-[#003c33] md:inline-flex">
+          <Link href="/contact" className="pill ml-auto hidden bg-[#17171c] text-white hover:bg-[#1863dc] md:inline-flex">
             Start a project <ArrowUpRight size={15} />
           </Link>
 

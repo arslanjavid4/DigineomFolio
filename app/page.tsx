@@ -13,9 +13,9 @@ export default function Home() {
       <Hero />
       <ClientsStats />
       <Services />
-      <section className="section-padding bg-[#003c33] text-white">
+      <section className="section-padding bg-[#1863dc] text-white">
         <div className="container-custom grid gap-12 lg:grid-cols-[1fr_2fr]">
-          <p className="eyebrow text-[#a9e8cc]">How we work</p>
+          <p className="eyebrow text-[#c7dbff]">How we work</p>
           <div>
             <h2 className="display max-w-5xl text-6xl md:text-8xl">Clarity before complexity.</h2>
             <p className="mt-10 max-w-2xl text-xl leading-relaxed text-white/75">

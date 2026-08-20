@@ -20,7 +20,7 @@ export default function Projects() {
             transition={{ duration: 0.6 }}
             className="mb-20 grid gap-8 border-b pb-12 lg:grid-cols-[1fr_2fr] lg:items-end"
           >
-            <p className="eyebrow text-[#003c33]">Work / 2022—2024</p>
+            <p className="eyebrow text-[#1863dc]">Work / 2022—2024</p>
             <div><h1 className="display text-7xl md:text-9xl">Selected projects.</h1><p className="mt-8 max-w-2xl text-xl text-neutral-600">Product stories spanning fintech, commerce, DeFi, and AI-powered platforms.</p></div>
           </motion.div>
 

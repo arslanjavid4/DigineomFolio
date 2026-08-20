@@ -54,7 +54,7 @@ export default function Services() {
           transition={{ duration: 0.6 }}
           className="mb-16 grid gap-6 border-t pt-6 md:grid-cols-2"
         >
-          <p className="eyebrow text-[#003c33]">Capabilities / 01—05</p>
+          <p className="eyebrow text-[#1863dc]">Capabilities / 01—05</p>
           <h2 className="display text-5xl md:text-7xl">
             From first thought to final product.
           </h2>
