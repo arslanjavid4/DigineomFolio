@@ -477,9 +477,13 @@ function focusedDocument(mode: "dark" | "light") {
   const source =
     mode === "light"
       ? replaceRequired(
-          GLOBE_STUDY_SOURCE,
-          AUTHORED_FIGURE_INK,
-          "var INK  = '38,40,48';",
+          replaceRequired(
+            GLOBE_STUDY_SOURCE,
+            AUTHORED_FIGURE_INK,
+            "var INK  = '22,26,34';",
+          ),
+          "var SOFT = 0.88;",
+          "var SOFT = 0.98;",
         )
       : GLOBE_STUDY_SOURCE;
 

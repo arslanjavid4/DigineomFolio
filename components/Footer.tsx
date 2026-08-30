@@ -24,14 +24,15 @@ export default function Footer() {
               Creating exceptional digital experiences through software development and thoughtful web design.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-8 md:justify-self-end md:gap-16">
-            <div>
-              <p className="eyebrow mb-4 text-[#1863dc]">Explore</p>
-              <div className="space-y-3 text-sm"><Link className="block text-[#17171c]/75 hover:text-[#17171c]" href="/projects">Projects</Link><Link className="block text-[#17171c]/75 hover:text-[#17171c]" href="/about">About</Link></div>
-            </div>
-            <div>
-              <p className="eyebrow mb-4 text-[#1863dc]">Connect</p>
-              <div className="space-y-3 text-sm"><Link className="block text-[#17171c]/75 hover:text-[#17171c]" href="/contact">Contact</Link><a className="block text-[#17171c]/75 hover:text-[#17171c]" href="mailto:info@digineom.co">info@digineom.co</a></div>
+          <div className="md:justify-self-end">
+            <p className="eyebrow mb-4 text-[#1863dc]">Connect</p>
+            <div className="space-y-3 text-sm">
+              <Link className="block text-[#17171c]/75 hover:text-[#17171c]" href="/contact">
+                Contact
+              </Link>
+              <a className="block text-[#17171c]/75 hover:text-[#17171c]" href="mailto:info@digineom.co">
+                info@digineom.co
+              </a>
             </div>
           </div>
         </div>

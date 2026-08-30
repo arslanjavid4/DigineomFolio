@@ -4,6 +4,15 @@ const nextConfig = {
   images: {
     domains: ['images.unsplash.com', 'via.placeholder.com', 'plus.unsplash.com', 'placehold.co'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/about',
+        destination: '/',
+        permanent: false,
+      },
+    ]
+  },
   async headers() {
     return [
       {

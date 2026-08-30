@@ -23,7 +23,7 @@ export default function TalentBridgeHero({ children }: { children: ReactNode }) 
 
   const globeScale = useTransform(scrollYProgress, [0, 0.52], [2.2, 2.95]);
   const globeX = useTransform(scrollYProgress, [0, 0.52], ["46vw", "0vw"]);
-  const globeOpacity = useTransform(scrollYProgress, [0, 0.42, 0.82, 1], [0.82, 0.4, 0.22, 0.08]);
+  const globeOpacity = useTransform(scrollYProgress, [0, 0.42, 0.82, 1], [1, 0.4, 0.22, 0.08]);
 
   useMotionValueEvent(scrollYProgress, "change", (value) => {
     setGlobeLive(value < 0.26);
@@ -43,14 +43,14 @@ export default function TalentBridgeHero({ children }: { children: ReactNode }) 
               globeLive ? "pointer-events-auto" : "pointer-events-none"
             }`}
           >
-            <GlobeStudy mode="light" className="h-full w-full" />
+            <GlobeStudy mode="light" brightness={1.12} className="h-full w-full" />
           </motion.div>
         </div>
       </div>
 
       <section className="pointer-events-none relative z-10 -mt-[100svh] min-h-svh px-5 pb-16 pt-24 sm:px-8 md:pb-20 md:pt-28 lg:px-12">
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-white via-white/90 to-transparent lg:w-[40%]"
+          <div
+          className="pointer-events-none absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-white via-white/78 to-transparent lg:w-[40%]"
           aria-hidden="true"
         />
         <div className="container-custom relative grid min-h-[calc(100svh-10rem)] items-center lg:grid-cols-[minmax(0,34rem)_1fr]">
