@@ -201,7 +201,7 @@ export default function AboutPage() {
                   }}
                   aria-hidden="true"
                 />
-                <p className="eyebrow relative text-[#1863dc]">Adoption</p>
+                <div className="relative" aria-hidden="true" />
                 <div className="relative">
                   <p className="display text-7xl text-[#1863dc] sm:text-8xl lg:text-[7.5rem]">72%</p>
                   <p className="mt-5 max-w-sm text-base leading-relaxed text-neutral-600 md:text-lg">
@@ -215,7 +215,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.55, delay: 0.06 }}
                 className="flex min-h-[200px] flex-col justify-between rounded-[22px] border border-[#d9d9dd] bg-[#f8f9fb] px-7 py-7"
               >
-                <p className="eyebrow text-[#1863dc]">Market size</p>
+                <div aria-hidden="true" />
                 <div>
                 <p className="display text-5xl text-[#17171c] md:text-6xl lg:text-7xl">$123.3B</p>
                 <p className="mt-4 max-w-md text-sm leading-relaxed text-neutral-600 md:text-base">
@@ -230,7 +230,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.5, delay: 0.1 }}
                   className="flex min-h-[180px] flex-col justify-between rounded-[22px] border border-[#d9d9dd] bg-white px-6 py-6"
                 >
-                  <p className="eyebrow text-neutral-500">Hiring speed</p>
+                  <div aria-hidden="true" />
                   <div>
                   <p className="display text-5xl text-[#17171c] md:text-6xl">41%</p>
                   <p className="mt-3 text-sm leading-relaxed text-neutral-600">
@@ -244,7 +244,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.5, delay: 0.14 }}
                   className="flex min-h-[180px] flex-col justify-between rounded-[22px] bg-[#1863dc] px-6 py-6 text-white"
                 >
-                  <p className="eyebrow text-[#c7dbff]">Workforce</p>
+                  <div aria-hidden="true" />
                   <div>
                   <p className="display text-5xl md:text-6xl">1.9M</p>
                   <p className="mt-3 text-sm leading-relaxed text-white/75">
