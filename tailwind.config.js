@@ -63,6 +63,8 @@ module.exports = {
         "spotlight": "spotlight 2s ease .75s 1 forwards",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
         "fade-in-up": "slideUp 0.5s ease-out forwards",
+        "accordion-down": "accordion-down 0.7s cubic-bezier(0.16, 1, 0.3, 1)",
+        "accordion-up": "accordion-up 0.55s cubic-bezier(0.16, 1, 0.3, 1)",
       },
       keyframes: {
         fadeIn: {
@@ -99,6 +101,14 @@ module.exports = {
         "marquee-vertical": {
           "from": { transform: "translateY(0)" },
           "to": { transform: "translateY(-100%)" },
+        },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
     },

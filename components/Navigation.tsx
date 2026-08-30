@@ -29,7 +29,7 @@ export default function Navigation({
         <Link href="/" className="inline-flex items-center" aria-label="DigiNeom home">
           <Image
             src="/Images/QVC9EYR2LA7kyLTy3yqvyEimTI.png"
-            alt="DigiNeom Solutions"
+            alt="DigiNeom"
             width={120}
             height={40}
             className="h-8 w-auto"

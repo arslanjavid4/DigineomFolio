@@ -1,0 +1,34 @@
+# DigiNeom
+
+> DigiNeom places degree-verified South Asian software engineers with companies in Europe and North America. Engineers work from co-working spaces DigiNeom manages — not from home, and not as a freelance marketplace.
+
+DigiNeom is a talent company, not a software agency. Clients hire a verified engineer onto their own team. DigiNeom handles sourcing, degree and skill verification, contracts, invoicing, and the workspace. The client manages the work.
+
+## Site
+
+- Home: https://digineom.co
+- Contact: https://digineom.co/contact
+- Email: info@digineom.co
+- LinkedIn: https://www.linkedin.com/company/digineom
+
+## What DigiNeom does
+
+1. Sources software engineers in South Asia.
+2. Independently verifies degrees, tests skills through live coding, and assesses English and references. Under 3% of applicants are placed.
+3. Matches engineers to roles at companies in Europe and North America.
+4. Seats every engineer in a premium co-working space DigiNeom manages (enterprise internet, power backup, company hardware, meeting rooms, access control).
+5. Handles contracts, invoicing, performance reviews, and replacements.
+
+## Who it is for
+
+Software companies and engineering teams in Europe and North America that need additional engineers at Western output standard without a second local payroll. Typical savings versus North American or Western European rates: 60–75%.
+
+## How a placement starts
+
+Tell DigiNeom the role (stack, seniority, timezone overlap). DigiNeom vets and verifies. The client interviews a shortlist and chooses. The engineer starts from a managed co-working floor, on DigiNeom equipment, on the client's timezone.
+
+## What DigiNeom is not
+
+- Not a web design or digital marketing agency.
+- Not a project outsourcing shop that delivers software on a statement of work.
+- Not a freelance marketplace of remote home-based contractors.

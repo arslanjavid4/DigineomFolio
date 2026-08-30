@@ -19,12 +19,13 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="grid gap-8 border-b border-[#17171c]/15 pb-12 lg:grid-cols-[1fr_2fr] lg:items-end"
           >
-            <p className="eyebrow text-[#1863dc]">Contact / New business</p>
+            <p className="eyebrow text-[#1863dc]">Contact</p>
             <div>
-              <h1 className="display text-6xl sm:text-7xl md:text-8xl">Let’s make something useful.</h1>
+              <h1 className="display text-6xl sm:text-7xl md:text-8xl">Talk to us about a role.</h1>
               <p className="mt-8 max-w-2xl text-xl leading-relaxed text-[#17171c]/70">
-                Whether you need a product designed and built, or verified engineers to extend the
-                team you already have, start here and we&apos;ll point you to the right person.
+                Degree-verified engineers for Europe and North America, working from co-working
+                spaces we manage. Brief the stack, seniority, and timezone — one conversation is
+                enough to start.
               </p>
             </div>
           </motion.div>
@@ -42,25 +43,20 @@ export default function Contact() {
             >
               <div>
                 <h3 className="mb-6 text-3xl font-semibold tracking-tight">
-                  Start a conversation
+                  Start with one engineer
                 </h3>
                 <p className="mb-8 max-w-md text-white/70">
-                  Tell us what you&apos;re building, what needs to change, or which role you&apos;re
-                  trying to fill. One message reaches both sides of the business.
+                  Tell us the role you need to fill. We vet, verify, and seat the engineer. You
+                  manage the work.
                 </p>
               </div>
 
               <div className="space-y-6 border-t border-white/25 pt-8">
                 <div>
-                  <p className="eyebrow mb-2 text-[#c7dbff]">Product & design work</p>
+                  <p className="eyebrow mb-2 text-[#c7dbff]">What to include</p>
                   <p className="max-w-md text-sm leading-relaxed text-white/70">
-                    Strategy, design, and development for teams shipping something new.
-                  </p>
-                </div>
-                <div>
-                  <p className="eyebrow mb-2 text-[#c7dbff]">Verified engineering talent</p>
-                  <p className="max-w-md text-sm leading-relaxed text-white/70">
-                    Degree-verified engineers in managed co-working spaces, on your timezone.
+                    Stack, seniority, timezone overlap, and the outcome you need. A few sentences is
+                    enough — we will ask if we need more.
                   </p>
                 </div>
               </div>

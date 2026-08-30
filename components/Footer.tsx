@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { SITE_EMAIL, SITE_LINKEDIN } from "@/lib/site";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,14 +15,15 @@ export default function Footer() {
             <Link href="/" className="inline-flex" aria-label="DigiNeom home">
               <Image
                 src="/Images/QVC9EYR2LA7kyLTy3yqvyEimTI.png"
-                alt="DigiNeom Solutions"
+                alt="DigiNeom"
                 width={140}
                 height={50}
                 className="h-10 w-auto"
               />
             </Link>
             <p className="mt-6 max-w-sm leading-relaxed text-[#17171c]/70">
-              Creating exceptional digital experiences through software development and thoughtful web design.
+              Degree-verified engineers for Europe and North America, working from co-working spaces
+              we manage.
             </p>
           </div>
           <div className="md:justify-self-end">
@@ -30,15 +32,22 @@ export default function Footer() {
               <Link className="block text-[#17171c]/75 hover:text-[#17171c]" href="/contact">
                 Contact
               </Link>
-              <a className="block text-[#17171c]/75 hover:text-[#17171c]" href="mailto:info@digineom.co">
-                info@digineom.co
+              <a className="block text-[#17171c]/75 hover:text-[#17171c]" href={`mailto:${SITE_EMAIL}`}>
+                {SITE_EMAIL}
+              </a>
+              <a
+                className="block text-[#17171c]/75 hover:text-[#17171c]"
+                rel="noopener noreferrer"
+                href={SITE_LINKEDIN}
+              >
+                LinkedIn
               </a>
             </div>
           </div>
         </div>
         <div className="flex flex-col justify-between gap-4 pt-7 text-xs text-[#17171c]/45 md:flex-row">
           <p>© {currentYear} DigiNeom. All rights reserved.</p>
-          <p>Strategy · Design · Development</p>
+          <p>Verified talent · Managed workspace</p>
         </div>
       </div>
     </footer>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import GlobeStudy from "@/components/ui/globe-study";
+import SmoothHashLink from "@/components/SmoothHashLink";
 
 const reveal = {
   initial: { opacity: 0, y: 24 },
@@ -65,9 +66,9 @@ export default function TalentBridgeHero({ children }: { children: ReactNode }) 
               <Link href="/contact" className="pill bg-[#1863dc] text-white hover:bg-[#0d47a1]">
                 Talk to us about a role <ArrowUpRight size={17} />
               </Link>
-              <Link href="#workspace" className="pill border border-[#17171c] hover:bg-[#eeece7]">
+              <SmoothHashLink href="#workspace" className="pill border border-[#17171c] hover:bg-[#eeece7]">
                 View our culture
-              </Link>
+              </SmoothHashLink>
             </div>
           </motion.div>
         </div>

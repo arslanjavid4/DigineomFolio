@@ -25,17 +25,16 @@ export default function ContactForm() {
       <div className="space-y-6">
         <div>
           <label htmlFor="inquiryType" className="eyebrow mb-2 block">
-            What do you need?
+            What are you hiring for?
           </label>
           <select
             id="inquiryType"
             name="inquiryType"
-            defaultValue="Product & design work"
+            defaultValue="Verified engineering talent"
             className={`${fieldClass} [&>option]:text-[#17171c]`}
           >
-            <option>Product &amp; design work</option>
             <option>Verified engineering talent</option>
-            <option>Both / not sure yet</option>
+            <option>Not sure yet</option>
           </select>
         </div>
 
@@ -92,12 +91,12 @@ export default function ContactForm() {
             required
             rows={6}
             className={`${fieldClass} resize-none`}
-            placeholder="Tell us about your project, or the role you're hiring for..."
+            placeholder="Tell us about the role you're hiring for..."
           />
           <ValidationError prefix="Message" field="message" errors={state.errors} className="mt-2 block text-sm text-[#ffad9b]" />
         </div>
 
-        <input type="hidden" name="_subject" value="New inquiry from DigiNeom" />
+        <input type="hidden" name="_subject" value="Role inquiry from DigiNeom" />
         <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
 
         <ValidationError errors={state.errors} className="block text-sm text-[#ffad9b]" />
