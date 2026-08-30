@@ -6,8 +6,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function Navigation() {
+export default function Navigation({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overlay'
+}) {
   const [isOpen, setIsOpen] = useState(false)
+  const overlay = variant === 'overlay'
 
   const navItems = [
     { name: 'Work', href: '/projects' },
@@ -16,7 +21,13 @@ export default function Navigation() {
   ]
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-[#d9d9dd] bg-white/95 backdrop-blur">
+    <nav
+      className={
+        overlay
+          ? 'absolute inset-x-0 top-0 z-30 w-full'
+          : 'sticky top-0 z-50 w-full border-b border-[#d9d9dd] bg-white/95 backdrop-blur'
+      }
+    >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: 0 }}

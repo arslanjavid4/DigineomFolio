@@ -1,7 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import TalentBridgeHero from '@/components/TalentBridgeHero';
+import { Waves } from '@/components/ui/wave-background';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -28,13 +32,6 @@ const reveal = {
   viewport: { once: true, margin: '-80px' },
   transition: { duration: 0.6 },
 };
-
-const marketStats = [
-  { value: '72%', label: 'of global organizations already augment their engineering teams' },
-  { value: '41%', label: 'shorter hiring cycles versus traditional recruitment' },
-  { value: '$123.3B', label: 'global IT staffing market in 2025, heading to $152.5B by 2031' },
-  { value: '1.9M', label: 'contracted IT specialists working through this model today' },
-];
 
 const model = [
   {
@@ -112,91 +109,165 @@ const objections = [
   },
 ];
 
+function PromisesPanel() {
+  const [active, setActive] = useState(0);
+  const item = guarantees[active];
+  const Icon = item.icon;
+
+  const onTabKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+    event.preventDefault();
+    const next =
+      event.key === 'ArrowRight'
+        ? (active + 1) % guarantees.length
+        : (active - 1 + guarantees.length) % guarantees.length;
+    setActive(next);
+    document.getElementById(`promise-tab-${next}`)?.focus();
+  };
+
+  return (
+    <div>
+      <div
+        role="tablist"
+        aria-label="Contract promises"
+        onKeyDown={onTabKeyDown}
+        className="-mx-1 flex gap-x-6 gap-y-1 overflow-x-auto border-b px-1"
+      >
+        {guarantees.map((guarantee, index) => {
+          const selected = index === active;
+          return (
+            <button
+              key={guarantee.title}
+              type="button"
+              role="tab"
+              id={`promise-tab-${index}`}
+              aria-selected={selected}
+              aria-controls={`promise-panel-${index}`}
+              tabIndex={selected ? 0 : -1}
+              onClick={() => setActive(index)}
+              className={cn(
+                'shrink-0 border-b-2 pb-3 text-left text-sm font-medium transition-colors',
+                selected
+                  ? 'border-[#1863dc] text-[#1863dc]'
+                  : 'border-transparent text-neutral-500 hover:text-[#17171c]',
+              )}
+            >
+              {guarantee.title}
+            </button>
+          );
+        })}
+      </div>
+
+      <div
+        role="tabpanel"
+        id={`promise-panel-${active}`}
+        aria-labelledby={`promise-tab-${active}`}
+        className="border-t pt-10"
+      >
+        <Icon className="h-6 w-6 text-[#1863dc]" aria-hidden="true" />
+        <h3 className="mt-6 display text-3xl md:text-5xl">{item.title}</h3>
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-neutral-600 md:text-xl">{item.copy}</p>
+      </div>
+    </div>
+  );
+}
+
 const values = [
-  { title: 'Verified, not claimed', copy: 'Every credential is independently checked before a CV ever reaches a client.' },
-  { title: 'Seated, not scattered', copy: 'Engineers work from managed co-working floors with the highest level of facilities — never an improvised home desk.' },
-  { title: 'Transparent pricing', copy: 'One flat monthly rate per engineer, workspace included. No hidden margins.' },
-  { title: 'Partnership over placement', copy: 'We succeed only when the engineer stays, performs, and grows with the client.' },
+  { title: 'Verified, not claimed', copy: 'Checked before a CV reaches you.' },
+  { title: 'Seated, not scattered', copy: 'A managed floor, not a kitchen table.' },
+  { title: 'Transparent pricing', copy: 'One flat rate. Workspace included.' },
+  { title: 'Partnership over placement', copy: 'We succeed only if they stay.' },
 ];
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <Navigation />
+    <main className="relative min-h-screen bg-white">
+      <Navigation variant="overlay" />
 
-      {/* Hero */}
-      <section className="px-5 pb-16 pt-14 sm:px-8 md:pb-20 md:pt-20 lg:px-12">
-        <div className="container-custom">
-          <motion.div {...reveal} className="grid gap-6 border-b pb-10 lg:grid-cols-[1fr_1.9fr] lg:items-end">
-            <p className="eyebrow text-[#1863dc]">Talent bridge / Verified engineering teams</p>
-            <div>
-              <h1 className="display text-[13vw] leading-[0.9] sm:text-6xl md:text-7xl lg:text-[5.25rem]">
-                Talent without borders.<br />Trust without doubt.
-              </h1>
-              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-neutral-600 md:text-xl">
-                We give European and North American companies a second engineering team without a
-                second payroll — degree-verified engineers, working from co-working spaces we manage
-                to a standard most offshore hires never see.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/contact" className="pill bg-[#1863dc] text-white hover:bg-[#0d47a1]">
-                  Talk to us about a role <ArrowUpRight size={17} />
-                </Link>
-                <Link href="#workspace" className="pill border border-[#17171c] hover:bg-[#eeece7]">
-                  View our culture
-                </Link>
+      <TalentBridgeHero>
+        <section className="relative min-h-svh overflow-hidden px-5 py-16 sm:px-8 md:py-20 lg:px-12">
+          <div className="pointer-events-none absolute inset-0 bg-[#f1f5ff]/58" aria-hidden="true" />
+          <div className="container-custom relative">
+            <div className="grid gap-4 lg:grid-cols-2 lg:grid-rows-[minmax(200px,1fr)_minmax(180px,auto)]">
+              <motion.article
+                {...reveal}
+                className="relative flex min-h-[320px] flex-col justify-between overflow-hidden rounded-[22px] border border-[#d9d9dd] bg-white px-7 py-8 lg:row-span-2 lg:min-h-[440px] lg:px-9 lg:py-10"
+              >
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-[0.35]"
+                  style={{
+                    backgroundImage:
+                      'repeating-linear-gradient(-32deg, rgba(24,99,220,0.09) 0 1px, transparent 1px 14px)',
+                  }}
+                  aria-hidden="true"
+                />
+                <p className="eyebrow relative text-[#1863dc]">Adoption</p>
+                <div className="relative">
+                  <p className="display text-7xl text-[#1863dc] sm:text-8xl lg:text-[7.5rem]">72%</p>
+                  <p className="mt-5 max-w-sm text-base leading-relaxed text-neutral-600 md:text-lg">
+                    of global organizations already augment their engineering teams
+                  </p>
+                </div>
+              </motion.article>
+
+              <motion.article
+                {...reveal}
+                transition={{ duration: 0.55, delay: 0.06 }}
+                className="flex min-h-[200px] flex-col justify-between rounded-[22px] border border-[#d9d9dd] bg-[#f8f9fb] px-7 py-7"
+              >
+                <p className="eyebrow text-[#1863dc]">Market size</p>
+                <div>
+                <p className="display text-5xl text-[#17171c] md:text-6xl lg:text-7xl">$123.3B</p>
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-neutral-600 md:text-base">
+                  global IT staffing market in 2025, heading to $152.5B by 2031
+                </p>
+                </div>
+              </motion.article>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <motion.article
+                  {...reveal}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="flex min-h-[180px] flex-col justify-between rounded-[22px] border border-[#d9d9dd] bg-white px-6 py-6"
+                >
+                  <p className="eyebrow text-neutral-500">Hiring speed</p>
+                  <div>
+                  <p className="display text-5xl text-[#17171c] md:text-6xl">41%</p>
+                  <p className="mt-3 text-sm leading-relaxed text-neutral-600">
+                    shorter hiring cycles versus traditional recruitment
+                  </p>
+                  </div>
+                </motion.article>
+
+                <motion.article
+                  {...reveal}
+                  transition={{ duration: 0.5, delay: 0.14 }}
+                  className="flex min-h-[180px] flex-col justify-between rounded-[22px] bg-[#1863dc] px-6 py-6 text-white"
+                >
+                  <p className="eyebrow text-[#c7dbff]">Workforce</p>
+                  <div>
+                  <p className="display text-5xl md:text-6xl">1.9M</p>
+                  <p className="mt-3 text-sm leading-relaxed text-white/75">
+                    contracted IT specialists working through this model today
+                  </p>
+                  </div>
+                </motion.article>
               </div>
             </div>
-          </motion.div>
-
-          <motion.div
-            {...reveal}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="relative mt-10 aspect-[16/7] w-full overflow-hidden rounded-[22px] bg-neutral-100"
-          >
-            <Image
-              src="/workspace/floor-01.webp"
-              alt="Engineers at work on our managed co-working floor"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Market proof strip */}
-      <section className="section-padding bg-[#f1f5ff] py-16 md:py-20">
-        <div className="container-custom">
-          <motion.p {...reveal} className="eyebrow mb-10 text-[#1863dc]">
-            A mainstream, validated model
-          </motion.p>
-          <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-            {marketStats.map((stat, index) => (
-              <motion.div
-                key={stat.value}
-                {...reveal}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="border-t border-[#1863dc]/25 pt-5"
-              >
-                <p className="display text-5xl text-[#1863dc] md:text-6xl">{stat.value}</p>
-                <p className="mt-4 text-base leading-relaxed text-neutral-600">{stat.label}</p>
-              </motion.div>
-            ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </TalentBridgeHero>
 
       {/* Vision & mission */}
-      <section className="section-padding bg-[#1863dc] text-white">
-        <div className="container-custom grid gap-14 lg:grid-cols-[1fr_2fr]">
-          <motion.p {...reveal} className="eyebrow text-[#c7dbff]">
+      <section className="relative overflow-hidden section-padding bg-[#1863dc] text-white">
+        <Waves />
+        <div className="container-custom relative z-10 grid gap-14 lg:grid-cols-[1fr_2fr]">
+          <motion.h2 {...reveal} className="display text-3xl md:text-4xl">
             Vision & mission
-          </motion.p>
+          </motion.h2>
           <div className="space-y-16">
             <motion.blockquote {...reveal}>
-              <p className="eyebrow mb-6 text-[#c7dbff]">Vision</p>
+              <h3 className="mb-6 text-xl font-semibold tracking-[-0.03em]">Vision</h3>
               <p className="display text-3xl leading-[1.08] md:text-5xl">
                 A world where a company’s ambition is never limited by the price of talent — where
                 every brilliant engineer, wherever they were born, works on the world stage with
@@ -205,7 +276,7 @@ export default function AboutPage() {
             </motion.blockquote>
 
             <motion.blockquote {...reveal} className="border-t border-white/25 pt-12">
-              <p className="eyebrow mb-6 text-[#c7dbff]">Mission</p>
+              <h3 className="mb-6 text-xl font-semibold tracking-[-0.03em]">Mission</h3>
               <p className="text-xl leading-relaxed text-white/85 md:text-2xl">
                 To deliver Western-standard engineering output at up to 70% lower cost — from a desk
                 we manage, with full transparency from CV to code.
@@ -218,9 +289,8 @@ export default function AboutPage() {
       {/* The model */}
       <section className="section-padding">
         <div className="container-custom">
-          <motion.div {...reveal} className="mb-14 grid gap-6 border-t pt-6 md:grid-cols-2">
-            <p className="eyebrow text-[#1863dc]">The model / 01—03</p>
-            <h2 className="display text-4xl md:text-6xl">
+          <motion.div {...reveal} className="mb-14 border-t pt-6">
+            <h2 className="display max-w-4xl text-4xl md:text-6xl">
               Offshore engineering, with the infrastructure included.
             </h2>
           </motion.div>
@@ -256,10 +326,13 @@ export default function AboutPage() {
       </section>
 
       {/* The workspace */}
-      <section id="workspace" className="scroll-mt-24 bg-[#17171c] px-5 py-20 text-white sm:px-8 md:py-28 lg:px-12">
-        <div className="container-custom">
-          <motion.div {...reveal} className="mb-12 grid gap-6 border-t border-white/25 pt-6 md:grid-cols-2">
-            <p className="eyebrow text-[#c7dbff]">The workspace</p>
+      <section
+        id="workspace"
+        className="relative overflow-hidden scroll-mt-24 section-padding bg-[#1863dc] text-white"
+      >
+        <Waves />
+        <div className="container-custom relative z-10">
+          <motion.div {...reveal} className="mb-12 border-t border-white/25 pt-6">
             <div>
               <h2 className="display text-4xl md:text-6xl">
                 Nobody codes for you from a kitchen table.
@@ -335,10 +408,9 @@ export default function AboutPage() {
       </section>
 
       {/* How it works */}
-      <section className="section-padding bg-[#f1f5ff]">
+      <section className="section-padding bg-white">
         <div className="container-custom">
-          <motion.div {...reveal} className="mb-14 grid gap-6 border-t border-[#1863dc]/25 pt-6 md:grid-cols-2">
-            <p className="eyebrow text-[#1863dc]">How it works</p>
+          <motion.div {...reveal} className="mb-14 border-t pt-6">
             <h2 className="display text-4xl md:text-6xl">Four steps to a working engineer.</h2>
           </motion.div>
 
@@ -362,8 +434,7 @@ export default function AboutPage() {
       {/* Vetting funnel */}
       <section className="section-padding">
         <div className="container-custom">
-          <motion.div {...reveal} className="mb-14 grid gap-6 border-t pt-6 md:grid-cols-2">
-            <p className="eyebrow text-[#1863dc]">The vetting funnel</p>
+          <motion.div {...reveal} className="mb-14 border-t pt-6">
             <div>
               <h2 className="display text-4xl md:text-6xl">Under 3% make it through.</h2>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-neutral-600">
@@ -394,10 +465,10 @@ export default function AboutPage() {
       </section>
 
       {/* Cost argument */}
-      <section className="section-padding bg-[#1863dc] text-white">
-        <div className="container-custom">
-          <motion.div {...reveal} className="mb-14 grid gap-6 border-t border-white/25 pt-6 md:grid-cols-2">
-            <p className="eyebrow text-[#c7dbff]">The cost argument</p>
+      <section className="relative overflow-hidden section-padding bg-[#1863dc] text-white">
+        <Waves />
+        <div className="container-custom relative z-10">
+          <motion.div {...reveal} className="mb-14 border-t border-white/25 pt-6">
             <div>
               <h2 className="display text-4xl md:text-6xl">Same standard. 60–75% less.</h2>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/75">
@@ -440,36 +511,18 @@ export default function AboutPage() {
       {/* Guarantees */}
       <section className="section-padding">
         <div className="container-custom">
-          <motion.div {...reveal} className="mb-14 grid gap-6 border-t pt-6 md:grid-cols-2">
-            <p className="eyebrow text-[#1863dc]">What we commit to</p>
+          <motion.div {...reveal} className="mb-14 border-t pt-6">
             <h2 className="display text-4xl md:text-6xl">Promises we put in the contract.</h2>
           </motion.div>
 
-          <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-            {guarantees.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={item.title}
-                  {...reveal}
-                  transition={{ duration: 0.5, delay: index * 0.06 }}
-                  className="border-t pt-6"
-                >
-                  <Icon className="h-5 w-5 text-[#1863dc]" aria-hidden="true" />
-                  <h3 className="mt-5 text-2xl font-semibold tracking-[-0.03em]">{item.title}</h3>
-                  <p className="mt-3 leading-relaxed text-neutral-600">{item.copy}</p>
-                </motion.div>
-              );
-            })}
-          </div>
+          <PromisesPanel />
         </div>
       </section>
 
       {/* Objections */}
       <section className="section-padding bg-[#f1f5ff]">
         <div className="container-custom">
-          <motion.div {...reveal} className="mb-14 grid gap-6 border-t border-[#1863dc]/25 pt-6 md:grid-cols-2">
-            <p className="eyebrow text-[#1863dc]">The hard questions</p>
+          <motion.div {...reveal} className="mb-14 border-t border-[#1863dc]/25 pt-6">
             <h2 className="display text-4xl md:text-6xl">Answered before you ask.</h2>
           </motion.div>
 
@@ -497,10 +550,7 @@ export default function AboutPage() {
 
       {/* Where we operate */}
       <section className="section-padding">
-        <div className="container-custom grid gap-12 lg:grid-cols-[1fr_2fr]">
-          <motion.p {...reveal} className="eyebrow text-[#1863dc]">
-            Where we operate
-          </motion.p>
+        <div className="container-custom">
           <div>
             <motion.h2 {...reveal} className="display text-4xl md:text-6xl">
               Europe first. Deliberately.
@@ -528,24 +578,21 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="section-padding pt-0">
+      <section className="section-padding bg-white">
         <div className="container-custom">
-          <motion.div {...reveal} className="mb-12 grid gap-6 border-t pt-6 md:grid-cols-2">
-            <p className="eyebrow text-[#1863dc]">Core values</p>
-            <h2 className="display text-3xl md:text-5xl">How we hold ourselves to it.</h2>
-          </motion.div>
+          <motion.h2 {...reveal} className="display mb-14 max-w-3xl text-3xl md:text-5xl">
+            How we hold ourselves to it.
+          </motion.h2>
 
-          <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-x-16 gap-y-12 sm:grid-cols-2">
             {values.map((item, index) => (
               <motion.div
                 key={item.title}
                 {...reveal}
-                transition={{ duration: 0.5, delay: index * 0.06 }}
-                className="border-t pt-5"
+                transition={{ duration: 0.5, delay: index * 0.05 }}
               >
-                <ShieldCheck className="h-4 w-4 text-[#1863dc]" aria-hidden="true" />
-                <h3 className="mt-4 text-xl font-semibold tracking-[-0.02em]">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-neutral-600">{item.copy}</p>
+                <h3 className="display text-3xl md:text-5xl">{item.title}</h3>
+                <p className="mt-3 text-base text-neutral-500">{item.copy}</p>
               </motion.div>
             ))}
           </div>
@@ -553,9 +600,9 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-[#1863dc] text-white">
-        <div className="container-custom grid gap-10 border-t border-white/25 pt-7 lg:grid-cols-[1fr_2fr]">
-          <p className="eyebrow text-[#c7dbff]">No pitch required</p>
+      <section className="relative overflow-hidden section-padding bg-[#1863dc] text-white">
+        <Waves />
+        <div className="container-custom relative z-10 border-t border-white/25 pt-7">
           <div>
             <h2 className="display max-w-4xl text-4xl md:text-6xl lg:text-7xl">
               Start with one engineer and judge us on the work.
