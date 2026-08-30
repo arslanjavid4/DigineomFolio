@@ -24,24 +24,27 @@ export default function Navigation({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35 }}
-        className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12"
+        className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between gap-3 px-5 sm:gap-6 sm:px-8 lg:px-12"
       >
-        <Link href="/" className="inline-flex items-center" aria-label="DigiNeom home">
+        <Link href="/" className="inline-flex min-w-0 shrink items-center" aria-label="DigiNeom home">
           <Image
             src="/Images/QVC9EYR2LA7kyLTy3yqvyEimTI.png"
             alt="DigiNeom"
             width={120}
             height={40}
-            className="h-8 w-auto"
+            className="h-7 w-auto max-w-full sm:h-8"
             priority
           />
         </Link>
 
         <Link
           href="/contact"
-          className="pill bg-[#17171c] text-white hover:bg-[#1863dc]"
+          aria-label="Talk to us about a role"
+          className="pill shrink-0 bg-[#17171c] px-3.5 py-2 text-xs text-white hover:bg-[#1863dc] sm:px-6 sm:py-3 sm:text-sm"
         >
-          Talk to us about a role <ArrowUpRight size={15} />
+          <span className="sm:hidden">Talk to us</span>
+          <span className="hidden sm:inline">Talk to us about a role</span>
+          <ArrowUpRight className="h-3.5 w-3.5 sm:h-[15px] sm:w-[15px]" />
         </Link>
       </motion.div>
     </nav>
