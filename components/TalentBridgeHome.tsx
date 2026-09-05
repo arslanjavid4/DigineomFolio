@@ -11,12 +11,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import SmoothHashLink from '@/components/SmoothHashLink';
+import { ZoomParallax } from '@/components/ui/zoom-parallax';
 
 const smoothEase = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
 
@@ -52,6 +52,37 @@ const steps = [
   { title: 'They start, seated', copy: 'Your engineer begins from a managed co-working floor, on our equipment, on your timezone, from day one.' },
 ];
 
+const workspaceShots = [
+  {
+    src: '/workspace/floor-02.webp',
+    alt: 'Managed DigiNeom co-working floor with open-plan engineer desks',
+  },
+  {
+    src: '/workspace/floor-04.webp',
+    alt: 'DigiNeom engineer working at a provisioned desk in a managed workspace',
+  },
+  {
+    src: '/workspace/floor-01.webp',
+    alt: 'Quiet focus area on a DigiNeom-managed co-working floor',
+  },
+  {
+    src: '/workspace/floor-03.webp',
+    alt: 'Collaboration area inside a DigiNeom-managed co-working space',
+  },
+  {
+    src: '/workspace/floor-02.webp',
+    alt: 'Open-plan desks with company hardware on the managed floor',
+  },
+  {
+    src: '/workspace/floor-01.webp',
+    alt: 'Premium co-working interior DigiNeom manages for placed engineers',
+  },
+  {
+    src: '/workspace/floor-04.webp',
+    alt: 'An engineer seated at a multi-monitor setup in the workspace',
+  },
+];
+
 const facilities = [
   { title: 'Enterprise connectivity', copy: 'Redundant high-speed lines so a dropped standup is never part of the deal.' },
   { title: 'Uninterrupted power', copy: 'Full backup infrastructure. Local outages stay a local problem, not your delivery risk.' },
@@ -76,87 +107,26 @@ const rates = [
   { region: 'Pakistan', junior: '$10–$25/hr', senior: '$40–$70/hr', note: 'Among the strongest cost-to-skill ratios in Asia' },
 ];
 
+const processPills = ['One briefing call', 'You interview', 'Seated from day one'];
+
 function ProcessSteps() {
-  const [active, setActive] = useState(0);
-  const item = steps[active];
-
-  const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
-    event.preventDefault();
-    const next =
-      event.key === 'ArrowRight'
-        ? (active + 1) % steps.length
-        : (active - 1 + steps.length) % steps.length;
-    setActive(next);
-    document.getElementById(`process-step-${next}`)?.focus();
-  };
-
   return (
-    <div>
-      <div
-        role="tablist"
-        aria-label="How a placement starts"
-        onKeyDown={onKeyDown}
-        className="relative grid gap-2 sm:grid-cols-4 sm:gap-0"
-      >
-        <div
-          className="pointer-events-none absolute left-0 right-0 top-[15px] hidden h-px bg-[#d9d9dd] sm:block"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute left-0 top-[15px] hidden h-px bg-[#1863dc] transition-[width] duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] sm:block"
-          style={{ width: `${(active / (steps.length - 1)) * 100}%` }}
-          aria-hidden="true"
-        />
-        {steps.map((step, index) => {
-          const selected = index === active;
-          return (
-            <button
-              key={step.title}
-              type="button"
-              role="tab"
-              id={`process-step-${index}`}
-              aria-selected={selected}
-              aria-controls="process-step-panel"
-              tabIndex={selected ? 0 : -1}
-              onClick={() => setActive(index)}
-              className="relative flex items-start gap-3 py-1 text-left sm:flex-col sm:items-center sm:px-2 sm:text-center"
-            >
-              <span
-                className={cn(
-                  'relative z-10 mt-0.5 h-[11px] w-[11px] shrink-0 rounded-full border-2 bg-white transition-colors duration-700',
-                  selected ? 'border-[#1863dc] bg-[#1863dc]' : 'border-[#d9d9dd]',
-                )}
-              />
-              <span
-                className={cn(
-                  'text-base leading-snug transition-colors duration-700 sm:mt-4 sm:text-sm md:text-base',
-                  selected ? 'font-semibold text-[#17171c]' : 'text-neutral-400 hover:text-neutral-600',
-                )}
-              >
-                {step.title}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.p
-            key={item.title}
-            role="tabpanel"
-            id="process-step-panel"
-            aria-labelledby={`process-step-${active}`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.7, ease: smoothEase }}
-            className="mt-10 max-w-2xl text-xl leading-relaxed text-neutral-600 sm:mx-auto sm:text-center md:text-2xl"
-          >
-            {item.copy}
-          </motion.p>
-        </AnimatePresence>
-    </div>
+    <Accordion type="single" collapsible defaultValue="0" className="w-full">
+      {steps.map((step, index) => (
+          <AccordionItem key={step.title} value={String(index)} className="border-[#d9d9dd] first:border-t">
+          <AccordionTrigger className="items-center py-5 text-left hover:no-underline [&>svg]:text-[#1863dc] [&>svg]:duration-500">
+            <span className="display pr-4 text-xl leading-[1.1] text-[#17171c] sm:text-2xl">
+              {step.title}
+            </span>
+          </AccordionTrigger>
+          <AccordionContent className="pb-6 text-base">
+            <p className="max-w-md text-[15px] leading-relaxed text-neutral-600 sm:text-base">
+              {step.copy}
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
   );
 }
 
@@ -378,69 +348,29 @@ export default function TalentBridgeHome() {
       </section>
 
       {/* The workspace */}
-      <section
-        id="workspace"
-        className="relative overflow-hidden scroll-mt-24 section-padding bg-[#1863dc] text-white"
-      >
-        <Waves />
-        <div className="container-custom relative z-10">
-          <motion.div {...reveal} className="mb-12 border-t border-white/25 pt-6">
-            <div>
-              <h2 className="display text-4xl md:text-6xl">
-                Nobody codes for you from a kitchen table.
-              </h2>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/70">
-                We place every engineer in a premium co-working space and manage it on their behalf.
-                It is the part of the model competitors talk around, because most of them cannot
-                show you a room.
-              </p>
-            </div>
+      <section id="workspace" className="relative scroll-mt-24 bg-[#1863dc] text-white">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <Waves />
+        </div>
+        <div className="container-custom relative z-10 px-5 pt-20 sm:px-8 md:pt-28 lg:px-12">
+          <motion.div {...reveal} className="border-t border-white/25 pt-6">
+            <h2 className="display text-4xl md:text-6xl">
+              Nobody codes for you from a kitchen table.
+            </h2>
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/70">
+              We place every engineer in a premium co-working space and manage it on their behalf.
+              It is the part of the model competitors talk around, because most of them cannot
+              show you a room.
+            </p>
           </motion.div>
+        </div>
 
-          <div className="grid gap-4 md:grid-cols-12 md:items-stretch">
-            <motion.div
-              {...reveal}
-              className="relative aspect-[4/3] overflow-hidden rounded-[22px] bg-white/5 md:col-span-7 md:aspect-auto md:h-full md:min-h-0"
-            >
-              <Image
-                src="/workspace/floor-02.webp"
-                alt="Managed DigiNeom co-working floor with open-plan engineer desks"
-                fill
-                sizes="(max-width: 768px) 100vw, 58vw"
-                className="object-cover"
-              />
-            </motion.div>
+        <div className="relative z-10 mt-8 md:mt-12">
+          <ZoomParallax images={workspaceShots} />
+        </div>
 
-            <motion.div
-              {...reveal}
-              transition={{ duration: 0.6, delay: 0.08 }}
-              className="relative aspect-[4/3] overflow-hidden rounded-[22px] bg-white/5 md:col-span-5 md:aspect-[16/11]"
-            >
-              <Image
-                src="/workspace/floor-04.webp"
-                alt="DigiNeom engineer working at a provisioned desk in a managed workspace"
-                fill
-                sizes="(max-width: 768px) 100vw, 42vw"
-                className="object-cover"
-              />
-            </motion.div>
-
-            <motion.div
-              {...reveal}
-              transition={{ duration: 0.6, delay: 0.12 }}
-              className="relative aspect-[16/9] overflow-hidden rounded-[22px] bg-white/5 md:col-span-12 md:aspect-[21/8]"
-            >
-              <Image
-                src="/workspace/floor-03.webp"
-                alt="Collaboration area inside a DigiNeom-managed co-working space"
-                fill
-                sizes="100vw"
-                className="object-cover"
-              />
-            </motion.div>
-          </div>
-
-          <div className="mt-16 grid gap-x-10 gap-y-10 border-t border-white/20 pt-12 md:grid-cols-2 lg:grid-cols-3">
+        <div className="container-custom relative z-10 px-5 pb-20 sm:px-8 md:pb-28 lg:px-12">
+          <div className="grid gap-x-10 gap-y-10 border-t border-white/20 pt-12 md:grid-cols-2 lg:grid-cols-3">
             {facilities.map((item, index) => (
               <motion.div
                 key={item.title}
@@ -456,13 +386,40 @@ export default function TalentBridgeHome() {
       </section>
 
       {/* How it works */}
-      <section id="process" className="section-padding bg-white">
-        <div className="container-custom">
-          <motion.div {...reveal} className="mb-12 border-t pt-6">
-            <h2 className="display text-4xl md:text-6xl">Four steps to a working engineer.</h2>
-          </motion.div>
+      <section id="process" className="bg-white">
+        <div className="grid lg:min-h-[40rem] lg:grid-cols-2">
+          <div className="flex flex-col justify-center px-5 py-16 sm:px-8 md:py-24 lg:px-12 xl:pl-[max(3rem,calc((100vw-1440px)/2+3rem))] xl:pr-16">
+            <motion.div {...reveal} className="max-w-xl">
+              <h2 className="display text-4xl md:text-6xl">Four steps to a working engineer.</h2>
+              <p className="mt-6 max-w-md text-base leading-relaxed text-neutral-600 md:text-lg">
+                From a briefing call to an engineer at a desk we manage. You stay in control of the
+                hire; we handle everything that happens before they sit down.
+              </p>
+              <div className="mt-7 flex flex-wrap gap-2">
+                {processPills.map((label) => (
+                  <span
+                    key={label}
+                    className="rounded-full border border-[#d9d9dd] bg-[#f1f5ff] px-3.5 py-1.5 text-sm text-[#17171c]"
+                  >
+                    {label}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-10">
+                <ProcessSteps />
+              </div>
+            </motion.div>
+          </div>
 
-          <ProcessSteps />
+          <div className="relative min-h-[18rem] sm:min-h-[24rem] lg:min-h-full">
+            <Image
+              src="/process/abstract.png"
+              alt=""
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 

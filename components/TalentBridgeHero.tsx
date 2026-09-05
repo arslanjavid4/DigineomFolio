@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef, useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
-import GlobeStudy from "@/components/ui/globe-study";
+import { motion } from "framer-motion";
+import { WorldMap } from "@/components/ui/world-map";
 import SmoothHashLink from "@/components/SmoothHashLink";
 
 const reveal = {
@@ -13,49 +13,39 @@ const reveal = {
   transition: { duration: 0.6 },
 };
 
+const routes = [
+  {
+    start: { lat: 31.5204, lng: 74.3587 },
+    end: { lat: 51.5074, lng: -0.1278 },
+  },
+  {
+    start: { lat: 31.5204, lng: 74.3587 },
+    end: { lat: 40.7128, lng: -74.006 },
+  },
+  {
+    start: { lat: 24.8607, lng: 67.0011 },
+    end: { lat: 52.52, lng: 13.405 },
+  },
+  {
+    start: { lat: 31.5204, lng: 74.3587 },
+    end: { lat: 43.6532, lng: -79.3832 },
+  },
+  {
+    start: { lat: 24.8607, lng: 67.0011 },
+    end: { lat: 37.7749, lng: -122.4194 },
+  },
+  {
+    start: { lat: 31.5204, lng: 74.3587 },
+    end: { lat: 52.3676, lng: 4.9041 },
+  },
+];
+
 export default function TalentBridgeHero({ children }: { children: ReactNode }) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [globeLive, setGlobeLive] = useState(true);
-
-  const { scrollYProgress } = useScroll({
-    target: trackRef,
-    offset: ["start start", "end end"],
-  });
-
-  const globeScale = useTransform(scrollYProgress, [0, 0.52], [2.2, 2.95]);
-  const globeX = useTransform(scrollYProgress, [0, 0.52], ["46vw", "0vw"]);
-  const globeOpacity = useTransform(scrollYProgress, [0, 0.42, 0.82, 1], [1, 0.4, 0.22, 0.08]);
-
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
-    setGlobeLive(value < 0.26);
-  });
-
   return (
-    <div ref={trackRef} className="relative">
-      <div className="pointer-events-none sticky top-0 z-0 h-svh overflow-hidden">
-        <div className="absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2">
-          <motion.div
-            style={{
-              x: globeX,
-              scale: globeScale,
-              opacity: globeOpacity,
-            }}
-            className={`h-[820px] w-[820px] origin-center will-change-transform [transform:translateZ(0)] ${
-              globeLive ? "pointer-events-auto" : "pointer-events-none"
-            }`}
-          >
-            <GlobeStudy mode="light" brightness={1.12} className="h-full w-full" />
-          </motion.div>
-        </div>
-      </div>
-
-      <section className="pointer-events-none relative z-10 -mt-[100svh] min-h-svh px-5 pb-16 pt-24 sm:px-8 md:pb-20 md:pt-28 lg:px-12">
-          <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-white via-white/78 to-transparent lg:w-[40%]"
-          aria-hidden="true"
-        />
-        <div className="container-custom relative grid min-h-[calc(100svh-10rem)] items-center lg:grid-cols-[minmax(0,34rem)_1fr]">
-          <motion.div {...reveal} className="pointer-events-auto relative z-10 max-w-lg">
+    <div className="relative">
+      <section className="relative overflow-hidden bg-white px-5 pb-10 pt-24 sm:px-8 md:pb-14 md:pt-28 lg:min-h-svh lg:px-12">
+        <div className="container-custom relative z-10">
+          <motion.div {...reveal} className="max-w-lg">
             <h1 className="display text-[2.6rem] leading-[0.95] sm:text-5xl md:text-6xl lg:text-[4rem]">
               A second engineering team. Not a second payroll.
             </h1>
@@ -71,6 +61,14 @@ export default function TalentBridgeHero({ children }: { children: ReactNode }) 
               </SmoothHashLink>
             </div>
           </motion.div>
+        </div>
+
+        <div className="pointer-events-none relative mt-10 w-[calc(100%+2.5rem)] -translate-x-5 sm:mt-14 sm:w-[calc(100%+4rem)] sm:-translate-x-8 lg:absolute lg:left-auto lg:right-0 lg:top-[48%] lg:mt-0 lg:w-[70%] lg:translate-x-[8%] lg:-translate-y-1/2">
+          <WorldMap dots={routes} lineColor="#1863dc" />
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 hidden w-[28%] bg-gradient-to-r from-white to-transparent lg:block"
+            aria-hidden="true"
+          />
         </div>
       </section>
 

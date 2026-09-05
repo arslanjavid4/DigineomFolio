@@ -61,7 +61,12 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
         </div>
       </section>
 
-      <ZoomParallax mainImage={project.image} gallery={project.gallery} />
+      <ZoomParallax
+        images={[
+          { src: project.image, alt: project.title },
+          ...project.gallery.map((src) => ({ src, alt: project.title })),
+        ]}
+      />
 
       <div className="pb-24 pt-12">
         <div className="container-custom">
