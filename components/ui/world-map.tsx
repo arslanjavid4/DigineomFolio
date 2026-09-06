@@ -15,9 +15,9 @@ interface MapProps {
   className?: string;
 }
 
-const DRAW_MS = 1600;
-const HOLD_MS = 450;
-const FADE_S = 0.35;
+const DRAW_MS = 2200;
+const HOLD_MS = 520;
+const FADE_S = 0.4;
 
 function projectPoint(lat: number, lng: number) {
   const x = (lng + 180) * (800 / 360);
@@ -29,8 +29,12 @@ function createCurvedPath(
   start: { x: number; y: number },
   end: { x: number; y: number }
 ) {
+  const dx = end.x - start.x;
+  const dy = end.y - start.y;
+  const dist = Math.hypot(dx, dy);
+  const lift = Math.min(90, Math.max(36, dist * 0.22));
   const midX = (start.x + end.x) / 2;
-  const midY = Math.min(start.y, end.y) - 50;
+  const midY = Math.min(start.y, end.y) - lift;
   return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
 }
 

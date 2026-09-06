@@ -17,12 +17,22 @@ import { ArrowUpRight } from 'lucide-react';
 import SmoothHashLink from '@/components/SmoothHashLink';
 import { ZoomParallax } from '@/components/ui/zoom-parallax';
 import { ScrollChoreography } from '@/components/ui/scroll-choreography';
+import CostRateMap from '@/components/CostRateMap';
+
+const easeOut = [0.22, 1, 0.36, 1] as const;
 
 const reveal = {
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: '-80px' },
-  transition: { duration: 0.6 },
+  transition: { duration: 0.7, ease: easeOut },
+};
+
+const revealCopy = {
+  initial: { opacity: 0, y: 12 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-80px' },
+  transition: { duration: 0.7, delay: 0.08, ease: easeOut },
 };
 
 const steps = [
@@ -140,14 +150,6 @@ function ribbonFill(heights: number[], scale: number) {
     'Z',
   ].join(' ');
 }
-
-const rates = [
-  { region: 'North America', junior: '~$80/hr', senior: 'up to $200/hr', note: 'Median US developer wage $133,080/yr, plus roughly 30% in benefits' },
-  { region: 'Western Europe', junior: '~$50/hr', senior: '~$150/hr', note: 'Germany, France, and the United Kingdom' },
-  { region: 'Central & Eastern Europe', junior: '$31–$39/hr', senior: '$64–$76/hr', note: 'The long-standing nearshore favourite for EU clients' },
-  { region: 'Latin America', junior: '$33–$45/hr', senior: '$60–$75/hr', note: 'Timezone premium for US clients' },
-  { region: 'Pakistan', junior: '$10–$25/hr', senior: '$40–$70/hr', note: 'Among the strongest cost-to-skill ratios in Asia' },
-];
 
 const processPills = ['One briefing call', 'You interview', 'Seated from day one'];
 
@@ -383,15 +385,18 @@ export default function TalentBridgeHome() {
       {/* The workspace */}
       <section id="workspace" className="relative scroll-mt-24 bg-[#1863dc] text-white">
         <div className="container-custom px-5 pt-20 sm:px-8 md:pt-28 lg:px-12">
-          <motion.div {...reveal} className="border-t border-white/25 pt-6">
-            <h2 className="display text-4xl md:text-6xl">
+          <motion.div className="border-t border-white/25 pt-6">
+            <motion.h2 {...reveal} className="display text-4xl md:text-6xl">
               Nobody codes for you from a kitchen table.
-            </h2>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/70">
+            </motion.h2>
+            <motion.p
+              {...revealCopy}
+              className="mt-7 max-w-xl text-lg leading-relaxed text-white/70"
+            >
               We place every engineer in a premium co-working space and manage it on their behalf.
               It is the part of the model competitors talk around, because most of them cannot
               show you a room.
-            </p>
+            </motion.p>
           </motion.div>
         </div>
 
@@ -419,13 +424,22 @@ export default function TalentBridgeHome() {
       <section id="process" className="bg-white">
         <div className="grid lg:min-h-[40rem] lg:grid-cols-2">
           <div className="flex flex-col justify-center px-5 py-16 sm:px-8 md:py-24 lg:px-12 xl:pl-[max(3rem,calc((100vw-1440px)/2+3rem))] xl:pr-16">
-            <motion.div {...reveal} className="max-w-xl">
-              <h2 className="display text-4xl md:text-6xl">Four steps to a working engineer.</h2>
-              <p className="mt-6 max-w-md text-base leading-relaxed text-neutral-600 md:text-lg">
+            <motion.div className="max-w-xl">
+              <motion.h2 {...reveal} className="display text-4xl md:text-6xl">
+                Four steps to a working engineer.
+              </motion.h2>
+              <motion.p
+                {...revealCopy}
+                className="mt-6 max-w-md text-base leading-relaxed text-neutral-600 md:text-lg"
+              >
                 From a briefing call to an engineer at a desk we manage. You stay in control of the
                 hire; we handle everything that happens before they sit down.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-2">
+              </motion.p>
+              <motion.div
+                {...revealCopy}
+                transition={{ duration: 0.7, delay: 0.16, ease: easeOut }}
+                className="mt-7 flex flex-wrap gap-2"
+              >
                 {processPills.map((label) => (
                   <span
                     key={label}
@@ -434,23 +448,26 @@ export default function TalentBridgeHome() {
                     {label}
                   </span>
                 ))}
-              </div>
-              <div className="mt-10">
+              </motion.div>
+              <motion.div {...revealCopy} transition={{ duration: 0.7, delay: 0.2, ease: easeOut }} className="mt-10">
                 <ProcessSteps />
-              </div>
+              </motion.div>
             </motion.div>
           </div>
 
           <div className="h-full px-5 pb-16 pt-4 sm:px-8 lg:py-16 lg:pl-8 lg:pr-12 xl:pr-[max(3rem,calc((100vw-1440px)/2+3rem))]">
-            <div className="relative min-h-[18rem] overflow-hidden rounded-[22px] sm:min-h-[24rem] lg:h-full lg:min-h-[32rem]">
+            <motion.div
+              {...reveal}
+              className="relative min-h-[18rem] overflow-hidden rounded-[22px] sm:min-h-[24rem] lg:h-full lg:min-h-[32rem]"
+            >
               <Image
-                src="/process/abstract.png"
-                alt=""
+                src="/process/engineer-desk.jpg"
+                alt="Code editor on a laptop with an AI actions menu highlighting Find Problems"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -458,15 +475,18 @@ export default function TalentBridgeHome() {
       {/* Vetting funnel */}
       <section id="vetting" className="section-padding bg-white">
         <div className="container-custom">
-          <motion.div {...reveal} className="mb-10 border-t border-[#d9d9dd] pt-6">
-            <div>
-              <h2 className="display text-4xl md:text-6xl">Under 3% make it through.</h2>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-neutral-600">
-                Most agencies describe their vetting in adjectives. We describe ours in numbers, and
-                we publish the acceptance rate as we place.
-              </p>
-            </div>
-          </motion.div>
+          <div className="mb-10 border-t border-[#d9d9dd] pt-6">
+            <motion.h2 {...reveal} className="display text-4xl md:text-6xl">
+              Under 3% make it through.
+            </motion.h2>
+            <motion.p
+              {...revealCopy}
+              className="mt-7 max-w-xl text-lg leading-relaxed text-neutral-600"
+            >
+              Most agencies describe their vetting in adjectives. We describe ours in numbers, and
+              we publish the acceptance rate as we place.
+            </motion.p>
+          </div>
 
           <VettingFunnel />
         </div>
@@ -475,58 +495,51 @@ export default function TalentBridgeHome() {
       {/* Cost argument */}
       <section id="cost" className="section-padding bg-[#1863dc] text-white">
         <div className="container-custom">
-          <motion.div {...reveal} className="mb-14 border-t border-white/25 pt-6">
-            <div>
-              <h2 className="display text-4xl md:text-6xl">Same standard. 60–75% less.</h2>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/75">
-                Advertised developer rates by region. The gap is the engine of the model — and the
-                reason a verified, seated engineer is not the same purchase as a cheap one.
-              </p>
-            </div>
+          <div className="mb-14 border-t border-white/25 pt-6">
+            <motion.h2 {...reveal} className="display text-4xl md:text-6xl">
+              Same standard. 60–75% less.
+            </motion.h2>
+            <motion.p
+              {...revealCopy}
+              className="mt-7 max-w-xl text-lg leading-relaxed text-white/75"
+            >
+              Advertised developer rates by region. The gap is the engine of the model — and the
+              reason a verified, seated engineer is not the same purchase as a cheap one.
+            </motion.p>
+          </div>
+
+          <motion.div {...reveal}>
+            <CostRateMap />
           </motion.div>
 
-          <motion.div {...reveal} className="overflow-x-auto">
-            <table className="w-full min-w-[720px] border-collapse text-left">
-              <thead>
-                <tr className="border-b border-white/30">
-                  <th className="eyebrow py-4 pr-6 font-semibold text-[#c7dbff]">Region</th>
-                  <th className="eyebrow py-4 pr-6 font-semibold text-[#c7dbff]">Junior</th>
-                  <th className="eyebrow py-4 pr-6 font-semibold text-[#c7dbff]">Senior</th>
-                  <th className="eyebrow py-4 font-semibold text-[#c7dbff]">Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rates.map((row) => (
-                  <tr key={row.region} className="border-b border-white/15">
-                    <td className="py-6 pr-6 text-xl font-semibold tracking-[-0.02em]">{row.region}</td>
-                    <td className="py-6 pr-6 font-mono text-base text-white/80">{row.junior}</td>
-                    <td className="py-6 pr-6 font-mono text-base text-white/80">{row.senior}</td>
-                    <td className="py-6 text-sm leading-relaxed text-white/65">{row.note}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </motion.div>
-
-          <p className="mt-8 text-sm text-white/55">
+          <motion.p {...revealCopy} className="mt-8 text-sm text-white/55">
             Rate benchmarks compiled from Accelerance, nCube, Upwork, Arc.dev, Glassdoor, and US BLS
             data, 2025–2026.
-          </p>
+          </motion.p>
         </div>
       </section>
 
       {/* CTA */}
       <section className="section-padding bg-[#1863dc] text-white">
         <div className="container-custom border-t border-white/25 pt-7">
-          <div>
-            <h2 className="display max-w-4xl text-4xl md:text-6xl lg:text-7xl">
-              Start with one engineer and judge us on the work.
-            </h2>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/75">
-              Most partnerships here begin with a single role and a short conversation about what
-              your team is missing. If the fit is wrong, we will tell you before you sign anything.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+          <motion.h2
+            {...reveal}
+            className="display max-w-4xl text-4xl md:text-6xl lg:text-7xl"
+          >
+            Start with one engineer and judge us on the work.
+          </motion.h2>
+          <motion.p
+            {...revealCopy}
+            className="mt-8 max-w-2xl text-lg leading-relaxed text-white/75"
+          >
+            Most partnerships here begin with a single role and a short conversation about what
+            your team is missing. If the fit is wrong, we will tell you before you sign anything.
+          </motion.p>
+          <motion.div
+            {...revealCopy}
+            transition={{ duration: 0.7, delay: 0.16, ease: easeOut }}
+            className="mt-9 flex flex-wrap gap-3"
+          >
               <Link href="/contact" className="pill bg-white text-[#1863dc] hover:bg-[#c7dbff]">
                 Talk to us about a role <ArrowUpRight size={17} />
               </Link>
@@ -536,8 +549,7 @@ export default function TalentBridgeHome() {
               >
                 See the workspace
               </SmoothHashLink>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
