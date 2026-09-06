@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import TalentBridgeHero from '@/components/TalentBridgeHero';
-import { Waves } from '@/components/ui/wave-background';
 import {
   Accordion,
   AccordionContent,
@@ -13,12 +12,11 @@ import {
 } from '@/components/ui/accordion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import SmoothHashLink from '@/components/SmoothHashLink';
 import { ZoomParallax } from '@/components/ui/zoom-parallax';
-
-const smoothEase = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
+import { ScrollChoreography } from '@/components/ui/scroll-choreography';
 
 const reveal = {
   initial: { opacity: 0, y: 24 },
@@ -26,24 +24,6 @@ const reveal = {
   viewport: { once: true, margin: '-80px' },
   transition: { duration: 0.6 },
 };
-
-const model = [
-  {
-    title: 'Sourcing & verification',
-    what: 'We recruit South Asian engineers, then independently verify degrees, test skills through live coding, and assess English and references.',
-    why: 'Removes the number one fear of offshore hiring: unverifiable CVs and credentials.',
-  },
-  {
-    title: 'Managed co-working workspace',
-    what: 'Every engineer works from a premium co-working space we manage — enterprise internet, power backup, company hardware, meeting rooms, and on-site support.',
-    why: 'You get the reliability of an office without leasing one, and none of the risk of an unknown home setup.',
-  },
-  {
-    title: 'Placement & account management',
-    what: 'We match engineers to your roles, then handle contracts, invoicing, performance reviews, and replacements.',
-    why: 'One point of accountability. You manage the work, we manage everything else.',
-  },
-];
 
 const steps = [
   { title: 'Tell us the role', copy: 'Stack, seniority, timezone overlap, and the outcome you need. One call is enough to brief us.' },
@@ -70,16 +50,12 @@ const workspaceShots = [
     alt: 'Collaboration area inside a DigiNeom-managed co-working space',
   },
   {
-    src: '/workspace/floor-02.webp',
-    alt: 'Open-plan desks with company hardware on the managed floor',
+    src: '/workspace/floor-05.jpg',
+    alt: 'Engineers working together at desks in a managed co-working space',
   },
   {
-    src: '/workspace/floor-01.webp',
-    alt: 'Premium co-working interior DigiNeom manages for placed engineers',
-  },
-  {
-    src: '/workspace/floor-04.webp',
-    alt: 'An engineer seated at a multi-monitor setup in the workspace',
+    src: '/workspace/floor-06.webp',
+    alt: 'People working in a premium co-working space DigiNeom manages',
   },
 ];
 
@@ -93,11 +69,77 @@ const facilities = [
 ];
 
 const funnel = [
-  { stage: 'Applications', value: '1,000', count: 1000 },
-  { stage: 'Pass technical testing', value: '120', count: 120 },
-  { stage: 'Reach interview', value: '40', count: 40 },
-  { stage: 'Placed with a client', value: '12', count: 12 },
+  { stage: 'Applications', short: 'Applications', value: '1,000', count: 1000, rate: '100%', of: 'inbound CVs' },
+  { stage: 'Pass technical testing', short: 'Technical', value: '120', count: 120, rate: '12%', of: 'pass live testing' },
+  { stage: 'Reach interview', short: 'Interview', value: '40', count: 40, rate: '4%', of: 'reach interview' },
+  { stage: 'Placed with a client', short: 'Placed', value: '12', count: 12, rate: '1.2%', of: 'seated with a client' },
 ];
+
+const marketMetrics = [
+  {
+    value: '72%',
+    detail: 'of global organizations already augment their engineering teams',
+  },
+  {
+    value: '$123.3B',
+    detail: 'global IT staffing market in 2025, heading to $152.5B by 2031',
+  },
+  {
+    value: '41%',
+    detail: 'shorter hiring cycles versus traditional recruitment',
+  },
+  {
+    value: '1.9M',
+    detail: 'contracted IT specialists working through this model today',
+  },
+];
+
+const RIBBON_W = 1200;
+const RIBBON_H = 320;
+const RIBBON_PAD = 90;
+const RIBBON_CY = RIBBON_H / 2;
+
+function funnelHeightAt(t: number, heights: number[]) {
+  const segs = heights.length - 1;
+  const x = Math.min(Math.max(t, 0), 0.9999) * segs;
+  const i = Math.floor(x);
+  const local = x - i;
+  const k = Math.max(0, (local - 0.58) / 0.42);
+  const e = k * k * (3 - 2 * k);
+  return heights[i] * (1 - e) + heights[i + 1] * e;
+}
+
+function ribbonFill(heights: number[], scale: number) {
+  const samples = 112;
+  const inner = RIBBON_W - RIBBON_PAD * 2;
+  const top: string[] = [];
+  const bot: string[] = [];
+
+  for (let i = 0; i <= samples; i += 1) {
+    const t = i / samples;
+    const x = RIBBON_PAD + inner * t;
+    const h = funnelHeightAt(t, heights) * scale;
+    top.push(`${x.toFixed(2)},${(RIBBON_CY - h / 2).toFixed(2)}`);
+    bot.push(`${x.toFixed(2)},${(RIBBON_CY + h / 2).toFixed(2)}`);
+  }
+
+  const hStart = funnelHeightAt(0, heights) * scale;
+  const hEnd = funnelHeightAt(1, heights) * scale;
+  const [xLast] = top[top.length - 1].split(',');
+  const [xFirst] = top[0].split(',');
+
+  return [
+    `M ${top[0]}`,
+    `L ${top.slice(1).join(' L ')}`,
+    `A 14 ${Math.max(8, hEnd / 2).toFixed(2)} 0 0 1 ${xLast},${(RIBBON_CY + hEnd / 2).toFixed(2)}`,
+    `L ${bot
+      .slice()
+      .reverse()
+      .join(' L ')}`,
+    `A 14 ${Math.max(8, hStart / 2).toFixed(2)} 0 0 1 ${xFirst},${(RIBBON_CY - hStart / 2).toFixed(2)}`,
+    'Z',
+  ].join(' ');
+}
 
 const rates = [
   { region: 'North America', junior: '~$80/hr', senior: 'up to $200/hr', note: 'Median US developer wage $133,080/yr, plus roughly 30% in benefits' },
@@ -108,6 +150,26 @@ const rates = [
 ];
 
 const processPills = ['One briefing call', 'You interview', 'Seated from day one'];
+
+const modelCards = {
+  topLeft: {
+    title: 'Sourcing & verification',
+    copy: 'Degrees, live coding, English — checked before a CV reaches you.',
+  },
+  bottomLeft: {
+    title: 'Managed co-working',
+    copy: 'A desk we run. Power, line, hardware, rooms.',
+  },
+  bottomRight: {
+    title: 'Placement & account',
+    copy: 'One contract. One person accountable for the hire.',
+  },
+  topRight: {
+    title: 'Offshore engineering, with the infrastructure included.',
+    copy: 'Verified talent, a desk we manage, and one team that owns the outcome.',
+    featured: true,
+  },
+};
 
 function ProcessSteps() {
   return (
@@ -131,101 +193,179 @@ function ProcessSteps() {
 }
 
 function VettingFunnel() {
-  const max = funnel[0].count;
-
-  return (
-    <div className="space-y-3 sm:space-y-4">
-      {funnel.map((item) => {
-        const width = Math.max(14, Math.pow(item.count / max, 0.42) * 100);
-        return (
-          <div
-            key={item.stage}
-            className="flex min-h-[4.75rem] w-full items-center justify-between gap-6 rounded-2xl bg-[#1863dc] px-6 py-4 text-white sm:mx-auto sm:w-[var(--bar-width)]"
-            style={{ ['--bar-width' as string]: `${width}%` } as React.CSSProperties}
-          >
-            <span className="display text-3xl leading-none md:text-5xl">{item.value}</span>
-            <span className="max-w-[11rem] text-right text-sm leading-snug text-white/80 sm:max-w-[14rem]">
-              {item.stage}
-            </span>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function ModelExplainer() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState<number | null>(null);
   const reduceMotion = useReducedMotion();
-  const duration = reduceMotion ? 0.01 : 1.15;
+  const max = funnel[0].count;
+  const heights = funnel.map((item) => 24 + 196 * Math.pow(item.count / max, 0.48));
+  const inner = RIBBON_W - RIBBON_PAD * 2;
+
+  const layers = [
+    { scale: 1, fill: '#d7e6ff' },
+    { scale: 0.78, fill: '#9ec2ff' },
+    { scale: 0.58, fill: '#4f89f0' },
+    { scale: 0.38, fill: '#1863dc' },
+    { scale: 0.2, fill: '#0d47a1' },
+  ];
 
   return (
-    <>
-      <Accordion type="single" defaultValue="0" className="model-accordion lg:hidden">
-        {model.map((entry, index) => (
-          <AccordionItem key={entry.title} value={String(index)} className="border-[#d9d9dd]">
-            <AccordionTrigger className="items-start py-7 text-left hover:no-underline [&>svg]:mt-2 [&>svg]:text-[#1863dc] [&>svg]:duration-700">
-              <span className="display pr-4 text-2xl leading-[1.05] sm:text-3xl">{entry.title}</span>
-            </AccordionTrigger>
-            <AccordionContent className="pb-8 text-base">
-              <p className="text-lg leading-relaxed text-[#17171c]">{entry.why}</p>
-              <p className="mt-4 text-base leading-relaxed text-neutral-600">{entry.what}</p>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-
-      <div className="hidden h-[32rem] gap-3 lg:flex">
-        {model.map((entry, index) => {
-          const selected = index === active;
-          return (
-            <motion.button
-              key={entry.title}
-              type="button"
-              aria-pressed={selected}
-              onClick={() => setActive(index)}
-              initial={false}
-              animate={{
-                flexGrow: selected ? 2.45 : 0.82,
-                backgroundColor: selected ? '#1863dc' : '#f1f5ff',
-                color: selected ? '#ffffff' : '#17171c',
-              }}
-              whileHover={
-                selected || reduceMotion ? undefined : { backgroundColor: '#e4ecfb' }
-              }
-              transition={{ duration, ease: smoothEase }}
-              className="flex h-full min-w-0 flex-col overflow-hidden rounded-[22px] p-8 text-left"
-              style={{ flexBasis: 0, flexShrink: 1 }}
+    <div>
+      <div className="relative px-2 pb-6 pt-4 sm:px-4 md:px-6 md:pb-8 md:pt-6">
+        <div className="relative mx-auto max-w-6xl">
+          <motion.div
+            initial={reduceMotion ? false : { clipPath: 'inset(0 100% 0 0)' }}
+            whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: reduceMotion ? 0 : 1.45, ease: [0.16, 1, 0.3, 1] }}
+            className="relative"
+          >
+            <svg
+              viewBox={`0 0 ${RIBBON_W} ${RIBBON_H}`}
+              className="h-[220px] w-full sm:h-[280px] md:h-[320px]"
+              preserveAspectRatio="none"
+              aria-hidden="true"
             >
-              <span className="display text-2xl leading-[1.1] xl:text-3xl">{entry.title}</span>
-              <AnimatePresence initial={false}>
-                {selected && (
-                  <motion.span
-                    key={`${entry.title}-copy`}
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{
-                      duration: reduceMotion ? 0.01 : 0.75,
-                      delay: reduceMotion ? 0 : 0.28,
-                      ease: smoothEase,
-                    }}
-                    className="block"
+              <defs>
+                <linearGradient id="vetting-sheen" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+                  <stop offset="46%" stopColor="#ffffff" stopOpacity="0.22" />
+                  <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                  {!reduceMotion && (
+                    <>
+                      <animate
+                        attributeName="x1"
+                        values="-80%;20%"
+                        dur="4.8s"
+                        repeatCount="indefinite"
+                      />
+                      <animate
+                        attributeName="x2"
+                        values="20%;120%"
+                        dur="4.8s"
+                        repeatCount="indefinite"
+                      />
+                    </>
+                  )}
+                </linearGradient>
+                <filter id="vetting-glow" x="-20%" y="-40%" width="140%" height="180%">
+                  <feGaussianBlur stdDeviation="18" />
+                </filter>
+              </defs>
+
+              <path
+                d={ribbonFill(heights, 1.08)}
+                fill="#1863dc"
+                opacity="0.18"
+                filter="url(#vetting-glow)"
+              />
+
+              {layers.map((layer) => (
+                <path key={layer.scale} d={ribbonFill(heights, layer.scale)} fill={layer.fill} />
+              ))}
+
+              <path d={ribbonFill(heights, 0.38)} fill="url(#vetting-sheen)" />
+
+              {funnel.map((item, index) => {
+                const t = index / (funnel.length - 1);
+                const x = RIBBON_PAD + inner * t;
+                const h = funnelHeightAt(t, heights);
+                const lit = active === null || active === index;
+                return (
+                  <line
+                    key={item.stage}
+                    x1={x}
+                    y1={RIBBON_CY - h / 2 - 10}
+                    x2={x}
+                    y2={RIBBON_CY + h / 2 + 10}
+                    stroke="white"
+                    strokeWidth={lit ? 2.4 : 1.4}
+                    strokeOpacity={lit ? 1 : 0.55}
+                  />
+                );
+              })}
+            </svg>
+          </motion.div>
+
+          <ul className="pointer-events-none absolute inset-x-0 top-0 hidden h-[220px] sm:block sm:h-[280px] md:h-[320px]">
+            {funnel.map((item, index) => {
+              const t = index / (funnel.length - 1);
+              const x = ((RIBBON_PAD + inner * t) / RIBBON_W) * 100;
+              const h = funnelHeightAt(t, heights);
+              const top = ((RIBBON_CY - h / 2) / RIBBON_H) * 100;
+              const bottom = ((RIBBON_CY + h / 2) / RIBBON_H) * 100;
+              const lit = active === null || active === index;
+
+              return (
+                <li
+                  key={item.stage}
+                  className="absolute"
+                  style={{ left: `${x}%` }}
+                >
+                  <span
+                    className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#ececef] bg-white px-3 py-1 text-[13px] font-semibold tracking-[-0.03em] text-[#17171c] shadow-[0_8px_24px_rgba(23,23,28,0.08)]"
+                    style={{ top: `${top}%`, opacity: lit ? 1 : 0.45 }}
                   >
-                    <span className="mt-8 block max-w-lg text-2xl leading-[1.2] tracking-[-0.03em] text-white xl:text-3xl">
-                      {entry.why}
-                    </span>
-                    <span className="mt-6 block max-w-lg text-base leading-relaxed text-white/75 xl:text-lg">
-                      {entry.what}
-                    </span>
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </motion.button>
-          );
-        })}
+                    {item.value}
+                  </span>
+                  <span
+                    className="absolute left-1/2 -translate-x-1/2 translate-y-1/2 whitespace-nowrap rounded-full border border-[#ececef] bg-white px-3 py-1 text-[12px] text-neutral-500 shadow-[0_8px_24px_rgba(23,23,28,0.08)]"
+                    style={{ top: `${bottom}%`, opacity: lit ? 1 : 0.45 }}
+                  >
+                    {item.short} · {item.rate}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="absolute inset-x-0 top-0 z-10 hidden h-[220px] sm:block sm:h-[280px] md:h-[320px]">
+            {funnel.map((item, index) => {
+              const t = index / (funnel.length - 1);
+              const x = ((RIBBON_PAD + inner * t) / RIBBON_W) * 100;
+              return (
+                <button
+                  key={item.stage}
+                  type="button"
+                  aria-label={`${item.value} ${item.of}`}
+                  aria-pressed={active === index}
+                  onMouseEnter={() => setActive(index)}
+                  onMouseLeave={() => setActive(null)}
+                  onFocus={() => setActive(index)}
+                  onBlur={() => setActive(null)}
+                  className="absolute top-0 h-full w-[22%] -translate-x-1/2 cursor-pointer"
+                  style={{ left: `${x}%` }}
+                />
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="mt-4 grid grid-cols-2 gap-3 px-3 sm:hidden">
+          {funnel.map((item) => (
+            <div key={item.stage} className="rounded-2xl bg-white px-3 py-3">
+              <p className="display text-2xl leading-none">{item.value}</p>
+              <p className="mt-1 text-xs text-neutral-500">
+                {item.short} · {item.rate}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <p className="sr-only">
+          {funnel.map((item) => `${item.value} ${item.of}`).join('. ')}
+        </p>
       </div>
-    </>
+
+      <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {marketMetrics.map((metric) => (
+          <motion.article key={metric.value} {...reveal}>
+            <p className="display text-3xl leading-none text-neutral-400 md:text-4xl">{metric.value}</p>
+            <p className="mt-3 max-w-[18rem] text-sm leading-relaxed text-neutral-400">
+              {metric.detail}
+            </p>
+          </motion.article>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -234,125 +374,15 @@ export default function TalentBridgeHome() {
     <main className="relative min-h-screen bg-white">
       <Navigation variant="overlay" />
 
-      <TalentBridgeHero>
-        <section className="relative min-h-svh overflow-hidden px-5 py-16 sm:px-8 md:py-20 lg:px-12">
-          <div className="pointer-events-none absolute inset-0 bg-[#f1f5ff]/58" aria-hidden="true" />
-          <div className="container-custom relative">
-            <div className="grid gap-4 lg:grid-cols-2 lg:grid-rows-[minmax(200px,1fr)_minmax(180px,auto)]">
-              <motion.article
-                {...reveal}
-                className="relative flex min-h-[320px] flex-col justify-between overflow-hidden rounded-[22px] border border-[#d9d9dd] bg-white px-7 py-8 lg:row-span-2 lg:min-h-[440px] lg:px-9 lg:py-10"
-              >
-                <div
-                  className="pointer-events-none absolute inset-0 opacity-[0.35]"
-                  style={{
-                    backgroundImage:
-                      'repeating-linear-gradient(-32deg, rgba(24,99,220,0.09) 0 1px, transparent 1px 14px)',
-                  }}
-                  aria-hidden="true"
-                />
-                <div className="relative" aria-hidden="true" />
-                <div className="relative">
-                  <p className="display text-7xl text-[#1863dc] sm:text-8xl lg:text-[7.5rem]">72%</p>
-                  <p className="mt-5 max-w-sm text-base leading-relaxed text-neutral-600 md:text-lg">
-                    of global organizations already augment their engineering teams
-                  </p>
-                </div>
-              </motion.article>
+      <TalentBridgeHero />
 
-              <motion.article
-                {...reveal}
-                transition={{ duration: 0.55, delay: 0.06 }}
-                className="flex min-h-[200px] flex-col justify-between rounded-[22px] border border-[#d9d9dd] bg-[#f8f9fb] px-7 py-7"
-              >
-                <div aria-hidden="true" />
-                <div>
-                <p className="display text-5xl text-[#17171c] md:text-6xl lg:text-7xl">$123.3B</p>
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-neutral-600 md:text-base">
-                  global IT staffing market in 2025, heading to $152.5B by 2031
-                </p>
-                </div>
-              </motion.article>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <motion.article
-                  {...reveal}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="flex min-h-[180px] flex-col justify-between rounded-[22px] border border-[#d9d9dd] bg-white px-6 py-6"
-                >
-                  <div aria-hidden="true" />
-                  <div>
-                  <p className="display text-5xl text-[#17171c] md:text-6xl">41%</p>
-                  <p className="mt-3 text-sm leading-relaxed text-neutral-600">
-                    shorter hiring cycles versus traditional recruitment
-                  </p>
-                  </div>
-                </motion.article>
-
-                <motion.article
-                  {...reveal}
-                  transition={{ duration: 0.5, delay: 0.14 }}
-                  className="flex min-h-[180px] flex-col justify-between rounded-[22px] bg-[#1863dc] px-6 py-6 text-white"
-                >
-                  <div aria-hidden="true" />
-                  <div>
-                  <p className="display text-5xl md:text-6xl">1.9M</p>
-                  <p className="mt-3 text-sm leading-relaxed text-white/75">
-                    contracted IT specialists working through this model today
-                  </p>
-                  </div>
-                </motion.article>
-              </div>
-            </div>
-          </div>
-        </section>
-      </TalentBridgeHero>
-
-      {/* Vision & mission */}
-      <section id="vision" className="relative overflow-hidden section-padding bg-[#1863dc] text-white">
-        <Waves />
-        <div className="container-custom relative z-10 grid gap-14 lg:grid-cols-[1fr_2fr]">
-          <motion.h2 {...reveal} className="display text-3xl md:text-4xl">
-            Vision & mission
-          </motion.h2>
-          <div className="space-y-16">
-            <motion.blockquote {...reveal}>
-              <p className="display text-3xl leading-[1.08] md:text-5xl">
-                A world where a company’s ambition is never limited by the price of talent — where
-                every brilliant engineer, wherever they were born, works on the world stage with
-                their skill proven and their degree verified.
-              </p>
-            </motion.blockquote>
-
-            <motion.blockquote {...reveal} className="border-t border-white/25 pt-12">
-              <p className="text-xl leading-relaxed text-white/85 md:text-2xl">
-                To deliver Western-standard engineering output at up to 70% lower cost — from a desk
-                we manage, with full transparency from CV to code.
-              </p>
-            </motion.blockquote>
-          </div>
-        </div>
-      </section>
-
-      {/* The model */}
-      <section id="model" className="section-padding bg-white">
-        <div className="container-custom">
-          <motion.div {...reveal} className="mb-12 border-t pt-6 lg:mb-6">
-            <h2 className="display max-w-4xl text-4xl md:text-6xl">
-              Offshore engineering, with the infrastructure included.
-            </h2>
-          </motion.div>
-
-          <ModelExplainer />
-        </div>
+      <section id="model" className="bg-white">
+        <ScrollChoreography cards={modelCards} />
       </section>
 
       {/* The workspace */}
       <section id="workspace" className="relative scroll-mt-24 bg-[#1863dc] text-white">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-          <Waves />
-        </div>
-        <div className="container-custom relative z-10 px-5 pt-20 sm:px-8 md:pt-28 lg:px-12">
+        <div className="container-custom px-5 pt-20 sm:px-8 md:pt-28 lg:px-12">
           <motion.div {...reveal} className="border-t border-white/25 pt-6">
             <h2 className="display text-4xl md:text-6xl">
               Nobody codes for you from a kitchen table.
@@ -365,11 +395,11 @@ export default function TalentBridgeHome() {
           </motion.div>
         </div>
 
-        <div className="relative z-10 mt-8 md:mt-12">
+        <div className="relative mt-8 md:mt-12">
           <ZoomParallax images={workspaceShots} />
         </div>
 
-        <div className="container-custom relative z-10 px-5 pb-20 sm:px-8 md:pb-28 lg:px-12">
+        <div className="container-custom px-5 pb-20 sm:px-8 md:pb-28 lg:px-12">
           <div className="grid gap-x-10 gap-y-10 border-t border-white/20 pt-12 md:grid-cols-2 lg:grid-cols-3">
             {facilities.map((item, index) => (
               <motion.div
@@ -411,22 +441,24 @@ export default function TalentBridgeHome() {
             </motion.div>
           </div>
 
-          <div className="relative min-h-[18rem] sm:min-h-[24rem] lg:min-h-full">
-            <Image
-              src="/process/abstract.png"
-              alt=""
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
+          <div className="h-full px-5 pb-16 pt-4 sm:px-8 lg:py-16 lg:pl-8 lg:pr-12 xl:pr-[max(3rem,calc((100vw-1440px)/2+3rem))]">
+            <div className="relative min-h-[18rem] overflow-hidden rounded-[22px] sm:min-h-[24rem] lg:h-full lg:min-h-[32rem]">
+              <Image
+                src="/process/abstract.png"
+                alt=""
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Vetting funnel */}
-      <section id="vetting" className="section-padding">
+      <section id="vetting" className="section-padding bg-white">
         <div className="container-custom">
-          <motion.div {...reveal} className="mb-12 border-t pt-6">
+          <motion.div {...reveal} className="mb-10 border-t border-[#d9d9dd] pt-6">
             <div>
               <h2 className="display text-4xl md:text-6xl">Under 3% make it through.</h2>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-neutral-600">
@@ -437,17 +469,12 @@ export default function TalentBridgeHome() {
           </motion.div>
 
           <VettingFunnel />
-          <p className="mt-10 max-w-2xl text-sm leading-relaxed text-neutral-500">
-            Funnel shape shown at our target standard. Live figures are published as placements are
-            made, rather than estimated after the fact.
-          </p>
         </div>
       </section>
 
       {/* Cost argument */}
-      <section id="cost" className="relative overflow-hidden section-padding bg-[#1863dc] text-white">
-        <Waves />
-        <div className="container-custom relative z-10">
+      <section id="cost" className="section-padding bg-[#1863dc] text-white">
+        <div className="container-custom">
           <motion.div {...reveal} className="mb-14 border-t border-white/25 pt-6">
             <div>
               <h2 className="display text-4xl md:text-6xl">Same standard. 60–75% less.</h2>
@@ -489,9 +516,8 @@ export default function TalentBridgeHome() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden section-padding bg-[#1863dc] text-white">
-        <Waves />
-        <div className="container-custom relative z-10 border-t border-white/25 pt-7">
+      <section className="section-padding bg-[#1863dc] text-white">
+        <div className="container-custom border-t border-white/25 pt-7">
           <div>
             <h2 className="display max-w-4xl text-4xl md:text-6xl lg:text-7xl">
               Start with one engineer and judge us on the work.

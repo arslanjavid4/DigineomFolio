@@ -13,38 +13,27 @@ const reveal = {
   transition: { duration: 0.6 },
 };
 
-const routes = [
-  {
-    start: { lat: 31.5204, lng: 74.3587 },
-    end: { lat: 51.5074, lng: -0.1278 },
-  },
-  {
-    start: { lat: 31.5204, lng: 74.3587 },
-    end: { lat: 40.7128, lng: -74.006 },
-  },
-  {
-    start: { lat: 24.8607, lng: 67.0011 },
-    end: { lat: 52.52, lng: 13.405 },
-  },
-  {
-    start: { lat: 31.5204, lng: 74.3587 },
-    end: { lat: 43.6532, lng: -79.3832 },
-  },
-  {
-    start: { lat: 24.8607, lng: 67.0011 },
-    end: { lat: 37.7749, lng: -122.4194 },
-  },
-  {
-    start: { lat: 31.5204, lng: 74.3587 },
-    end: { lat: 52.3676, lng: 4.9041 },
-  },
+const cities = [
+  { lat: 31.5204, lng: 74.3587 },
+  { lat: 51.5074, lng: -0.1278 },
+  { lat: 52.3676, lng: 4.9041 },
+  { lat: 52.52, lng: 13.405 },
+  { lat: 40.7128, lng: -74.006 },
+  { lat: 43.6532, lng: -79.3832 },
+  { lat: 37.7749, lng: -122.4194 },
+  { lat: 24.8607, lng: 67.0011 },
 ];
 
-export default function TalentBridgeHero({ children }: { children: ReactNode }) {
+const routes = cities.map((start, index) => ({
+  start,
+  end: cities[(index + 1) % cities.length],
+}));
+
+export default function TalentBridgeHero({ children }: { children?: ReactNode }) {
   return (
     <div className="relative">
-      <section className="relative overflow-hidden bg-white px-5 pb-10 pt-24 sm:px-8 md:pb-14 md:pt-28 lg:min-h-svh lg:px-12">
-        <div className="container-custom relative z-10">
+      <section className="relative flex min-h-svh flex-col justify-center overflow-hidden bg-white px-5 py-24 sm:px-8 lg:px-12">
+        <div className="container-custom relative z-10 w-full">
           <motion.div {...reveal} className="max-w-lg">
             <h1 className="display text-[2.6rem] leading-[0.95] sm:text-5xl md:text-6xl lg:text-[4rem]">
               A second engineering team. Not a second payroll.
@@ -63,7 +52,7 @@ export default function TalentBridgeHero({ children }: { children: ReactNode }) 
           </motion.div>
         </div>
 
-        <div className="pointer-events-none relative mt-10 w-[calc(100%+2.5rem)] -translate-x-5 sm:mt-14 sm:w-[calc(100%+4rem)] sm:-translate-x-8 lg:absolute lg:left-auto lg:right-0 lg:top-[48%] lg:mt-0 lg:w-[70%] lg:translate-x-[8%] lg:-translate-y-1/2">
+        <div className="pointer-events-none relative mt-10 w-[calc(100%+2.5rem)] -translate-x-5 sm:mt-14 sm:w-[calc(100%+4rem)] sm:-translate-x-8 lg:absolute lg:left-auto lg:right-0 lg:top-1/2 lg:mt-0 lg:w-[70%] lg:translate-x-[8%] lg:-translate-y-1/2">
           <WorldMap dots={routes} lineColor="#1863dc" />
           <div
             className="pointer-events-none absolute inset-y-0 left-0 hidden w-[28%] bg-gradient-to-r from-white to-transparent lg:block"
@@ -72,7 +61,7 @@ export default function TalentBridgeHero({ children }: { children: ReactNode }) 
         </div>
       </section>
 
-      <div className="relative z-10">{children}</div>
+      {children ? <div className="relative z-10">{children}</div> : null}
     </div>
   );
 }

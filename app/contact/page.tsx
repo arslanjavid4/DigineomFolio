@@ -86,6 +86,26 @@ export default function Contact() {
         </div>
       </section>
 
+      <section className="section-padding border-t border-[#d9d9dd] bg-white">
+        <div className="container-custom grid gap-10 md:grid-cols-2 md:gap-16">
+          <div>
+            <h2 className="text-sm font-semibold tracking-[-0.02em] text-[#17171c]">Vision</h2>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-neutral-600">
+              A world where a company’s ambition is never limited by the price of talent — where
+              every brilliant engineer, wherever they were born, works on the world stage with
+              their skill proven and their degree verified.
+            </p>
+          </div>
+          <div>
+            <h2 className="text-sm font-semibold tracking-[-0.02em] text-[#17171c]">Mission</h2>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-neutral-600">
+              To deliver Western-standard engineering output at up to 70% lower cost — from a desk
+              we manage, with full transparency from CV to code.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   )
