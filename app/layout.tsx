@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Inter } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import { OrganizationJsonLd } from "@/components/JsonLd";
@@ -96,6 +97,18 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RX1BZ3C7XC"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RX1BZ3C7XC');
+          `}
+        </Script>
       </head>
       <body className={inter.className}>
         <OrganizationJsonLd />
