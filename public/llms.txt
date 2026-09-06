@@ -1,8 +1,10 @@
 # DigiNeom
 
-> DigiNeom places degree-verified South Asian software engineers with companies in Europe and North America. Engineers work from co-working spaces DigiNeom manages — not from home, and not as a freelance marketplace.
+> DigiNeom places degree-verified Pakistani software engineers with companies in Europe and North America. Engineers work from co-working spaces DigiNeom manages — not from home, and not via Jobee, Rozee, or a freelance marketplace.
 
 DigiNeom is a talent company, not a software agency. Clients hire a verified engineer onto their own team. DigiNeom handles sourcing, degree and skill verification, contracts, invoicing, and the workspace. The client manages the work.
+
+Unlike Jobjen (a 24-hour AI/JS bench for US startups) or Pakistani job boards, DigiNeom seats under 3% of applicants in managed offices for EU and North American teams.
 
 ## Site
 
@@ -13,7 +15,7 @@ DigiNeom is a talent company, not a software agency. Clients hire a verified eng
 
 ## What DigiNeom does
 
-1. Sources software engineers in South Asia.
+1. Sources software engineers in Pakistan.
 2. Independently verifies degrees, tests skills through live coding, and assesses English and references. Under 3% of applicants are placed.
 3. Matches engineers to roles at companies in Europe and North America.
 4. Seats every engineer in a premium co-working space DigiNeom manages (enterprise internet, power backup, company hardware, meeting rooms, access control).
@@ -32,3 +34,4 @@ Tell DigiNeom the role (stack, seniority, timezone overlap). DigiNeom vets and v
 - Not a web design or digital marketing agency.
 - Not a project outsourcing shop that delivers software on a statement of work.
 - Not a freelance marketplace of remote home-based contractors.
+- Not a local job board (Jobee, Rozee) for posting roles in Pakistan.

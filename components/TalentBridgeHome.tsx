@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import TalentBridgeHero from '@/components/TalentBridgeHero';
@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/accordion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'framer-motion';
+import { animate, motion, useInView, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import SmoothHashLink from '@/components/SmoothHashLink';
 import { ZoomParallax } from '@/components/ui/zoom-parallax';
@@ -45,7 +45,7 @@ const steps = [
 const workspaceShots = [
   {
     src: '/workspace/floor-02.webp',
-    alt: 'Managed DigiNeom co-working floor with open-plan engineer desks',
+    alt: 'Pakistani engineers at desks in a DigiNeom-managed co-working floor',
   },
   {
     src: '/workspace/floor-04.webp',
@@ -149,6 +149,79 @@ function ribbonFill(heights: number[], scale: number) {
     `A 14 ${Math.max(8, hStart / 2).toFixed(2)} 0 0 1 ${xFirst},${(RIBBON_CY - hStart / 2).toFixed(2)}`,
     'Z',
   ].join(' ');
+}
+
+type ParsedMetric = {
+  prefix: string;
+  target: number;
+  suffix: string;
+  decimals: number;
+  commas: boolean;
+};
+
+function parseMetric(value: string): ParsedMetric {
+  const match = value.match(/^([^0-9]*)([0-9][0-9,]*(?:\.[0-9]+)?)(.*)$/);
+  if (!match) {
+    return { prefix: '', target: 0, suffix: value, decimals: 0, commas: false };
+  }
+  const numeric = match[2];
+  const rawNum = numeric.replace(/,/g, '');
+  return {
+    prefix: match[1],
+    target: Number(rawNum),
+    suffix: match[3],
+    decimals: rawNum.includes('.') ? rawNum.split('.')[1].length : 0,
+    commas: numeric.includes(','),
+  };
+}
+
+function formatMetric(n: number, parsed: ParsedMetric) {
+  const body =
+    parsed.decimals > 0
+      ? n.toFixed(parsed.decimals)
+      : parsed.commas
+        ? Math.round(n).toLocaleString('en-US')
+        : String(Math.round(n));
+  return `${parsed.prefix}${body}${parsed.suffix}`;
+}
+
+function CountUp({
+  value,
+  className,
+  delay = 0,
+}: {
+  value: string;
+  className?: string;
+  delay?: number;
+}) {
+  const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+  const parsed = useMemo(() => parseMetric(value), [value]);
+  const [display, setDisplay] = useState(() => formatMetric(0, parsed));
+
+  useEffect(() => {
+    if (!isInView) return;
+    if (reduceMotion) {
+      setDisplay(value);
+      return;
+    }
+
+    const controls = animate(0, parsed.target, {
+      duration: 1.45,
+      delay,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (latest) => setDisplay(formatMetric(latest, parsed)),
+    });
+
+    return () => controls.stop();
+  }, [delay, isInView, parsed, reduceMotion, value]);
+
+  return (
+    <span ref={ref} className={className} aria-label={value}>
+      {display}
+    </span>
+  );
 }
 
 const processPills = ['One briefing call', 'You interview', 'Seated from day one'];
@@ -303,13 +376,13 @@ function VettingFunnel() {
                   style={{ left: `${x}%` }}
                 >
                   <span
-                    className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#ececef] bg-white px-3 py-1 text-[13px] font-semibold tracking-[-0.03em] text-[#17171c] shadow-[0_8px_24px_rgba(23,23,28,0.08)]"
+                    className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#d9d9dd] bg-white px-3 py-1 text-[13px] font-semibold tabular-nums tracking-[-0.03em] text-[#17171c]"
                     style={{ top: `${top}%`, opacity: lit ? 1 : 0.45 }}
                   >
-                    {item.value}
+                    <CountUp value={item.value} />
                   </span>
                   <span
-                    className="absolute left-1/2 -translate-x-1/2 translate-y-1/2 whitespace-nowrap rounded-full border border-[#ececef] bg-white px-3 py-1 text-[12px] text-neutral-500 shadow-[0_8px_24px_rgba(23,23,28,0.08)]"
+                    className="absolute left-1/2 -translate-x-1/2 translate-y-1/2 whitespace-nowrap rounded-full border border-[#d9d9dd] bg-white px-3 py-1 text-[12px] text-neutral-600"
                     style={{ top: `${bottom}%`, opacity: lit ? 1 : 0.45 }}
                   >
                     {item.short} · {item.rate}
@@ -343,9 +416,11 @@ function VettingFunnel() {
 
         <div className="mt-4 grid grid-cols-2 gap-3 px-3 sm:hidden">
           {funnel.map((item) => (
-            <div key={item.stage} className="rounded-2xl bg-white px-3 py-3">
-              <p className="display text-2xl leading-none">{item.value}</p>
-              <p className="mt-1 text-xs text-neutral-500">
+            <div key={item.stage} className="rounded-2xl border border-[#d9d9dd] bg-white px-3 py-3">
+              <p className="display text-2xl leading-none text-[#17171c]">
+                <CountUp value={item.value} />
+              </p>
+              <p className="mt-1 text-xs text-neutral-600">
                 {item.short} · {item.rate}
               </p>
             </div>
@@ -358,13 +433,15 @@ function VettingFunnel() {
       </div>
 
       <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        {marketMetrics.map((metric) => (
-          <motion.article key={metric.value} {...reveal}>
-            <p className="display text-3xl leading-none text-neutral-400 md:text-4xl">{metric.value}</p>
-            <p className="mt-3 max-w-[18rem] text-sm leading-relaxed text-neutral-400">
+        {marketMetrics.map((metric, index) => (
+          <article key={metric.value}>
+            <p className="display text-3xl leading-none text-[#1863dc] md:text-4xl">
+              <CountUp value={metric.value} delay={index * 0.08} className="tabular-nums" />
+            </p>
+            <p className="mt-3 max-w-[18rem] text-sm leading-relaxed text-neutral-600">
               {metric.detail}
             </p>
-          </motion.article>
+          </article>
         ))}
       </div>
     </div>
@@ -462,7 +539,7 @@ export default function TalentBridgeHome() {
             >
               <Image
                 src="/process/engineer-desk.jpg"
-                alt="Code editor on a laptop with an AI actions menu highlighting Find Problems"
+                alt="Pakistani software engineer coding in a modern editor on a DigiNeom-managed desk"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
@@ -519,7 +596,6 @@ export default function TalentBridgeHome() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="section-padding bg-[#1863dc] text-white">
         <div className="container-custom border-t border-white/25 pt-7">
           <motion.h2

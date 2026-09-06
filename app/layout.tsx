@@ -5,7 +5,6 @@ import { OrganizationJsonLd } from "@/components/JsonLd";
 import {
   SITE_DESCRIPTION,
   SITE_NAME,
-  SITE_TAGLINE,
   SITE_TITLE,
   SITE_URL,
 } from "@/lib/site";
@@ -27,13 +26,14 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   category: "Staffing",
   keywords: [
-    "offshore software engineers",
-    "staff augmentation Europe",
-    "verified engineers",
-    "IT staffing North America",
-    "managed co-working developers",
-    "degree-verified engineers",
-    "South Asian software talent",
+    "hire remote talent from Pakistan",
+    "hire Pakistani software engineers",
+    "vetted Pakistani developers",
+    "remote software engineers Pakistan",
+    "staff augmentation Pakistan",
+    "degree-verified Pakistani engineers",
+    "IT staff augmentation Europe",
+    "hire developers for US startups Pakistan",
   ],
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
@@ -44,6 +44,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
+    canonical: SITE_URL,
     types: {
       "text/plain": "/llms.txt",
     },
@@ -53,20 +54,20 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: SITE_TAGLINE,
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: SITE_TAGLINE,
+        alt: SITE_TITLE,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: SITE_TAGLINE,
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: ["/opengraph-image"],
   },

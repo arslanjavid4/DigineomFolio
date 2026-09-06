@@ -14,16 +14,17 @@ export default function Footer() {
           <div>
             <Link href="/" className="inline-flex" aria-label="DigiNeom home">
               <Image
-                src="/Images/QVC9EYR2LA7kyLTy3yqvyEimTI.png"
-                alt="DigiNeom"
-                width={140}
-                height={50}
+                src="/brand/logo.png"
+                alt="DigiNeom — hire vetted remote software talent from Pakistan"
+                width={160}
+                height={48}
                 className="h-10 w-auto"
+                sizes="160px"
               />
             </Link>
             <p className="mt-6 max-w-sm leading-relaxed text-[#17171c]/70">
-              Degree-verified engineers for Europe and North America, working from co-working spaces
-              we manage.
+              Hire vetted Pakistani software engineers for Europe and North America. They work from
+              co-working spaces we manage.
             </p>
           </div>
           <div className="md:justify-self-end">

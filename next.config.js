@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    formats: ['image/avif', 'image/webp'],
     domains: ['images.unsplash.com', 'via.placeholder.com', 'plus.unsplash.com', 'placehold.co'],
   },
   async redirects() {

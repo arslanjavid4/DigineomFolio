@@ -97,7 +97,7 @@ export function WorldMap({
       <Image
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
         className="pointer-events-none object-contain select-none [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)]"
-        alt="World map of engineer placements"
+        alt="World map showing DigiNeom engineer placements from Pakistan to Europe and North America"
         fill
         sizes="100vw"
         draggable={false}

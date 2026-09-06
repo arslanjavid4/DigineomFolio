@@ -25,7 +25,7 @@ function CardFace({
   heading,
 }: {
   card: ChoreographyCard;
-  heading: "h2" | "h3";
+  heading: "h2" | "h3" | "p";
 }) {
   const Tag = heading;
   const featured = Boolean(card.featured);
@@ -175,7 +175,7 @@ export function ScrollChoreography({ className, cards }: ScrollChoreographyProps
                 }}
                 className={cn(baseCardClasses, "origin-center bg-[#1863dc] text-white")}
               >
-                <CardFace card={{ ...cards.topRight, featured: true }} heading="h2" />
+                <CardFace card={{ ...cards.topRight, featured: true }} heading="p" />
               </motion.div>
             </motion.div>
           </div>

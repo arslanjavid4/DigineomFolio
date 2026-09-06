@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "DigiNeom — degree-verified offshore engineers for Europe and North America";
+  "Hire vetted remote talent from Pakistan | DigiNeom";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -43,7 +43,7 @@ export default function OpenGraphImage() {
               maxWidth: 920,
             }}
           >
-            A second engineering team. Not a second payroll.
+            Hire vetted remote talent from Pakistan.
           </div>
           <div
             style={{
@@ -54,8 +54,8 @@ export default function OpenGraphImage() {
               maxWidth: 820,
             }}
           >
-            Degree-verified engineers for Europe and North America, working from
-            co-working spaces we manage.
+            Degree-verified Pakistani engineers for Europe and North America,
+            working from co-working spaces we manage.
           </div>
         </div>
       </div>

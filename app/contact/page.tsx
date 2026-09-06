@@ -42,9 +42,9 @@ export default function Contact() {
               className="space-y-8"
             >
               <div>
-                <h3 className="mb-6 text-3xl font-semibold tracking-tight">
+                <h2 className="mb-6 text-3xl font-semibold tracking-tight">
                   Start with one engineer
-                </h3>
+                </h2>
                 <p className="mb-8 max-w-md text-white/70">
                   Tell us the role you need to fill. We vet, verify, and seat the engineer. You
                   manage the work.

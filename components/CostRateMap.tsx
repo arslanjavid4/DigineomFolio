@@ -153,7 +153,7 @@ export default function CostRateMap() {
         <div className="relative aspect-[2/1] w-full">
           <Image
             src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
-            alt=""
+            alt="Dotted world map comparing advertised software engineer rates, including Pakistan"
             fill
             sizes="(max-width: 1024px) 100vw, 70vw"
             className="pointer-events-none object-contain select-none [mask-image:linear-gradient(to_bottom,transparent,white_8%,white_92%,transparent)]"

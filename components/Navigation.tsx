@@ -28,12 +28,13 @@ export default function Navigation({
       >
         <Link href="/" className="inline-flex min-w-0 shrink items-center" aria-label="DigiNeom home">
           <Image
-            src="/Images/QVC9EYR2LA7kyLTy3yqvyEimTI.png"
-            alt="DigiNeom"
-            width={120}
-            height={40}
+            src="/brand/logo.png"
+            alt="DigiNeom — hire vetted remote software talent from Pakistan"
+            width={160}
+            height={48}
             className="h-7 w-auto max-w-full sm:h-8"
             priority
+            sizes="160px"
           />
         </Link>
 

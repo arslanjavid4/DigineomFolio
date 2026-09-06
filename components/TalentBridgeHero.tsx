@@ -39,7 +39,7 @@ export default function TalentBridgeHero({ children }: { children?: ReactNode })
               transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
               className="mt-10 max-w-[46ch] text-base leading-relaxed text-neutral-500 md:text-lg"
             >
-              Degree-verified engineers for Europe and North America, working from co-working spaces we manage.
+              Degree-verified Pakistani engineers for Europe and North America, working from co-working spaces we manage.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
