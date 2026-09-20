@@ -81,7 +81,7 @@ export default function HubsView() {
         </div>
       </section>
 
-      <section className="section-padding bg-[#f1f5ff]">
+      <section className="section-padding bg-white">
         <div className="container-custom">
           <motion.h2 {...reveal} className="display mb-10 text-3xl md:text-5xl">
             What the floor includes

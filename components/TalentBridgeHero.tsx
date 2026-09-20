@@ -50,7 +50,7 @@ export default function TalentBridgeHero({ children }: { children?: ReactNode })
               <Link href="/contact" className="pill bg-[#1863dc] text-white hover:bg-[#0d47a1]">
                 Talk to us about a role <ArrowUpRight size={17} />
               </Link>
-              <SmoothHashLink href="#workspace" className="pill border border-[#17171c] hover:bg-[#eeece7]">
+              <SmoothHashLink href="#workspace" className="pill border border-[#17171c] hover:border-[#1863dc]">
                 View our culture
               </SmoothHashLink>
             </motion.div>

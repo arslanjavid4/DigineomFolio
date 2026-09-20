@@ -23,7 +23,7 @@ export function PlacementTicket({
   return (
     <div
       className={cn(
-        "flex overflow-hidden rounded-2xl border border-[#d9d9dd] bg-[#f1f5ff]",
+        "flex overflow-hidden rounded-2xl border border-[#d9d9dd] bg-white",
         className,
       )}
     >

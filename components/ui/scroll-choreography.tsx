@@ -72,7 +72,7 @@ function StaticCards({ cards }: { cards: ScrollChoreographyProps["cards"] }) {
         {rest.map((card) => (
           <article
             key={card.title}
-            className="rounded-[22px] bg-[#f1f5ff] md:min-h-[14rem]"
+            className="rounded-[22px] bg-white border border-[#d9d9dd] md:min-h-[14rem]"
           >
             <CardFace card={card} heading="h3" />
           </article>
@@ -140,7 +140,7 @@ export function ScrollChoreography({ className, cards }: ScrollChoreographyProps
               style={{ x: tlX, y: tlY, opacity: underImagesOpacity }}
               className="absolute left-1/2 top-1/2 z-10 will-change-transform"
             >
-              <div className={cn(baseCardClasses, "bg-[#f1f5ff]")}>
+              <div className={cn(baseCardClasses, "bg-white border border-[#d9d9dd]")}>
                 <CardFace card={cards.topLeft} heading="h3" />
               </div>
             </motion.div>
@@ -149,7 +149,7 @@ export function ScrollChoreography({ className, cards }: ScrollChoreographyProps
               style={{ x: brX, y: brY, opacity: underImagesOpacity }}
               className="absolute left-1/2 top-1/2 z-20 will-change-transform"
             >
-              <div className={cn(baseCardClasses, "bg-[#f1f5ff]")}>
+              <div className={cn(baseCardClasses, "bg-white border border-[#d9d9dd]")}>
                 <CardFace card={cards.bottomRight} heading="h3" />
               </div>
             </motion.div>
@@ -158,7 +158,7 @@ export function ScrollChoreography({ className, cards }: ScrollChoreographyProps
               style={{ x: blX, y: blY, opacity: underImagesOpacity }}
               className="absolute left-1/2 top-1/2 z-30 will-change-transform"
             >
-              <div className={cn(baseCardClasses, "bg-[#f1f5ff]")}>
+              <div className={cn(baseCardClasses, "bg-white border border-[#d9d9dd]")}>
                 <CardFace card={cards.bottomLeft} heading="h3" />
               </div>
             </motion.div>

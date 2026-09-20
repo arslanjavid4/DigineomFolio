@@ -7,10 +7,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ABOUT_BELIEFS } from "@/lib/digineom-content";
 import { FolderTabCard } from "@/components/illustrative/FolderTabCard";
-import { InkStampDocument } from "@/components/illustrative/InkStampDocument";
 import { PlacementTicket } from "@/components/illustrative/PlacementTicket";
 import { StackedFolders } from "@/components/illustrative/StackedFolders";
-import { ResourceLinks } from "@/components/illustrative/ResourceLinks";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 const reveal = {
@@ -104,15 +102,13 @@ export default function AboutView() {
               ghosting, unverified claims, dropped calls — and because local hiring in London,
               Berlin, or New York had become prohibitively slow and expensive.
             </motion.p>
-            <motion.div {...reveal} className="mt-8">
-              <ResourceLinks
-                title="Open a file"
-                items={[
-                  { name: "Talent", description: "Open roles", href: "/talent", letter: "T" },
-                  { name: "Hubs", description: "Floors we run", href: "/hubs", letter: "H" },
-                  { name: "Clients", description: "50–100 staff stories", href: "/clients", letter: "C" },
-                ]}
-              />
+            <motion.div {...reveal} className="mt-8 flex flex-wrap gap-3">
+              <Link href="/talent" className="pill border border-[#17171c] hover:border-[#1863dc]">
+                Browse talent <ArrowUpRight size={16} />
+              </Link>
+              <Link href="/clients" className="pill bg-[#17171c] text-white hover:bg-[#1863dc]">
+                Client stories <ArrowUpRight size={16} />
+              </Link>
             </motion.div>
           </div>
 
@@ -137,7 +133,7 @@ export default function AboutView() {
         </div>
       </section>
 
-      <section className="section-padding bg-[#f1f5ff]">
+      <section className="section-padding bg-white">
         <div className="container-custom">
           <motion.h2 {...reveal} className="display mb-4 text-3xl md:text-5xl">
             Why we exist
@@ -148,28 +144,30 @@ export default function AboutView() {
           </motion.p>
 
           <div className="grid gap-5 md:grid-cols-3">
-            <InkStampDocument
-              reference="DN-DEGREE"
-              title="Degree file"
-              meta={["Submitted by · Academic registrar", "Check · Independent verification"]}
-              status="Required before shortlist"
-              stampLabel="Verified"
-            />
-            <InkStampDocument
-              reference="DN-CODE"
-              title="Live coding audit"
-              meta={["Submitted by · Assessment desk", "Format · Timed problem set"]}
-              status="Scored before client interview"
-              stampLabel="Passed"
-            />
-            <InkStampDocument
-              reference="DN-HUB"
-              title="Hub seating order"
-              meta={["Submitted by · Workspace ops", "Site · Managed co-working floor"]}
-              status="Desk ready on start date"
-              stampLabel="Seated"
-              stampTone="ink"
-            />
+            {[
+              {
+                title: "Degree verification",
+                copy: "Independent checks before a CV reaches you — not self-reported claims.",
+              },
+              {
+                title: "Live coding audit",
+                copy: "Timed problem sets scored before any client interview is booked.",
+              },
+              {
+                title: "Hub seating",
+                copy: "Desk ready on the managed floor by start date — power, line, and hardware included.",
+              },
+            ].map((item) => (
+              <article
+                key={item.title}
+                className="border border-[#d9d9dd] bg-white p-6"
+              >
+                <h3 className="text-xl font-semibold tracking-[-0.03em] text-[#17171c]">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-neutral-600">{item.copy}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -203,7 +201,7 @@ export default function AboutView() {
         </div>
       </section>
 
-      <section className="section-padding bg-[#f1f5ff]">
+      <section className="section-padding bg-white">
         <div className="container-custom">
           <motion.h2 {...reveal} className="display mb-3 text-3xl md:text-5xl">
             Four tickets to a working engineer.

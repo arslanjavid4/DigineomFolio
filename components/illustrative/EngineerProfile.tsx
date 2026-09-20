@@ -38,7 +38,7 @@ function InitialsMark({
   return (
     <div
       className={cn(
-        "flex shrink-0 items-center justify-center border border-[#d9d9dd] bg-[#f1f5ff] font-semibold text-[#1863dc]",
+        "flex shrink-0 items-center justify-center border border-[#d9d9dd] bg-white font-semibold text-[#1863dc]",
         size === "sm" ? "h-9 w-9 text-sm" : "h-14 w-14 text-lg",
         blur && "select-none blur-[5px]",
       )}
@@ -80,8 +80,8 @@ export function EngineerProfileCard({
   const body = (
     <article
       className={cn(
-        "relative h-full w-full border border-[#d9d9dd] bg-[#fffcf7] p-5 font-sans transition-colors",
-        href && "hover:border-[#1863dc]/50 hover:bg-white",
+        "relative h-full w-full border border-[#d9d9dd] bg-white p-5 font-sans transition-colors",
+        href && "hover:border-[#1863dc]",
         className,
       )}
     >
@@ -131,7 +131,7 @@ export function EngineerProfileCard({
           {skills.map((skill) => (
             <span
               key={skill}
-              className="rounded-full bg-[#f1f5ff] px-2.5 py-1 text-[11px] text-[#17171c]"
+              className="rounded-full border border-[#d9d9dd] bg-white px-2.5 py-1 text-[11px] text-[#17171c]"
             >
               {skill}
             </span>

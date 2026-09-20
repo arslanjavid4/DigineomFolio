@@ -47,7 +47,7 @@ export function ClientPlacard({
           )}
         >
           {/* Front — case label */}
-          <div className="absolute inset-0 rounded-sm border border-[#d9d9dd] bg-[#fffcf7] px-5 py-4 shadow-[0_8px_24px_rgba(23,23,28,0.04)] [backface-visibility:hidden]">
+          <div className="absolute inset-0 rounded-sm border border-[#d9d9dd] bg-white px-5 py-4 shadow-[0_8px_24px_rgba(23,23,28,0.04)] [backface-visibility:hidden]">
             <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-neutral-400">
               {catalogRef}
             </p>
@@ -70,7 +70,7 @@ export function ClientPlacard({
           </div>
 
           {/* Back — quote */}
-          <div className="absolute inset-0 [transform:rotateY(180deg)] rounded-sm border border-[#1863dc]/25 bg-[#f1f5ff] px-5 py-4 shadow-[0_8px_24px_rgba(23,23,28,0.04)] [backface-visibility:hidden]">
+          <div className="absolute inset-0 [transform:rotateY(180deg)] rounded-sm border border-[#1863dc]/25 bg-white px-5 py-4 shadow-[0_8px_24px_rgba(23,23,28,0.04)] [backface-visibility:hidden]">
             <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-[#1863dc]">
               Client note
             </p>
@@ -117,7 +117,7 @@ export function ClientQuoteCard({
   return (
     <div
       className={cn(
-        "border border-[#d9d9dd] bg-[#fffcf7] p-6 md:p-8",
+        "border border-[#d9d9dd] bg-white p-6 md:p-8",
         className,
       )}
     >

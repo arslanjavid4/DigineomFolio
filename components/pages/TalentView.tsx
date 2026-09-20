@@ -63,7 +63,7 @@ export default function TalentView() {
                   className={
                     domain === item.id
                       ? "rounded-full bg-[#1863dc] px-3.5 py-1.5 text-sm text-white"
-                      : "rounded-full border border-[#d9d9dd] px-3.5 py-1.5 text-sm text-[#17171c] hover:bg-[#f1f5ff]"
+                      : "rounded-full border border-[#d9d9dd] px-3.5 py-1.5 text-sm text-[#17171c] hover:border-[#1863dc]"
                   }
                 >
                   {item.label}

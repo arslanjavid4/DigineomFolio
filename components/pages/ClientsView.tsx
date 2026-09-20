@@ -12,8 +12,6 @@ import {
   ClientQuoteCard,
   PlacementRouteCard,
 } from "@/components/illustrative/ClientStoryCards";
-import { ResourceLinks } from "@/components/illustrative/ResourceLinks";
-import { InkStampDocument } from "@/components/illustrative/InkStampDocument";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -61,16 +59,6 @@ export default function ClientsView() {
               Anonymized engagements — industry, region, and outcomes. Flip a placard for the
               quote. No invented company names or logos.
             </p>
-            <div className="mt-8">
-              <ResourceLinks
-                title="Related files"
-                items={[
-                  { name: "Talent", description: "Open roles", href: "/talent", letter: "T" },
-                  { name: "Hubs", description: "Where they sit", href: "/hubs", letter: "H" },
-                  { name: "Pricing", description: "How we engage", href: "/pricing", letter: "P" },
-                ]}
-              />
-            </div>
           </div>
 
           <motion.div
@@ -88,7 +76,7 @@ export default function ClientsView() {
         </div>
       </section>
 
-      <section className="border-y border-[#d9d9dd] bg-[#f1f5ff] py-10">
+      <section className="border-y border-[#d9d9dd] bg-white py-10">
         <div className="container-custom px-5 sm:px-8 lg:px-12">
           <p className="eyebrow mb-5 text-[#1863dc]">Placement routes</p>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -125,7 +113,7 @@ export default function ClientsView() {
                   className={
                     filter === item
                       ? "rounded-full bg-[#1863dc] px-3.5 py-1.5 text-sm text-white"
-                      : "rounded-full border border-[#d9d9dd] px-3.5 py-1.5 text-sm hover:bg-[#f1f5ff]"
+                      : "rounded-full border border-[#d9d9dd] px-3.5 py-1.5 text-sm hover:border-[#1863dc]"
                   }
                 >
                   {item}
@@ -163,31 +151,18 @@ export default function ClientsView() {
             <p className="mt-10 text-neutral-600">No case files in that industry yet.</p>
           ) : null}
 
-          <div className="mt-16 grid gap-5 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-            <InkStampDocument
-              reference="DN-CLIENT-INDEX"
-              title="Engagement archive"
-              meta={[
-                "Audience · 50–100 staff product companies",
-                "Markets · Europe & North America",
-              ]}
-              status="Stories anonymized · outcomes real-pattern"
-              stampLabel="Confidential"
-              stampTone="ink"
-            />
-            <div className="rounded-[22px] bg-[#1863dc] p-8 text-white md:p-10">
-              <h2 className="display text-3xl md:text-4xl">Need a similar seating?</h2>
-              <p className="mt-4 max-w-md text-white/75">
-                Brief the role and region. We return a verified shortlist — you interview and
-                choose.
-              </p>
-              <Link
-                href="/contact"
-                className="pill mt-8 bg-white text-[#1863dc] hover:bg-[#c7dbff]"
-              >
-                Talk about your team <ArrowUpRight size={16} />
-              </Link>
-            </div>
+          <div className="mt-16 rounded-[22px] bg-[#1863dc] p-8 text-white md:p-10">
+            <h2 className="display text-3xl md:text-4xl">Need a similar seating?</h2>
+            <p className="mt-4 max-w-md text-white/75">
+              Brief the role and region. We return a verified shortlist — you interview and
+              choose.
+            </p>
+            <Link
+              href="/contact"
+              className="pill mt-8 bg-white text-[#1863dc] hover:bg-[#c7dbff]"
+            >
+              Talk about your team <ArrowUpRight size={16} />
+            </Link>
           </div>
         </div>
       </section>

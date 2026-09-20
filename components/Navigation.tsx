@@ -107,7 +107,7 @@ export default function Navigation({
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-xl px-3 py-3 text-base font-medium text-[#17171c] hover:bg-[#f1f5ff]"
+                  className="rounded-xl px-3 py-3 text-base font-medium text-[#17171c] hover:bg-white hover:text-[#1863dc]"
                 >
                   {link.label}
                 </Link>

@@ -45,7 +45,7 @@ function ContactFormFields() {
 
   if (state.succeeded) {
     return (
-      <div className="rounded-2xl border border-[#d9d9dd] bg-[#fffcf7] p-7 shadow-[0_24px_60px_rgba(23,23,28,0.18)] md:p-9">
+      <div className="rounded-2xl border border-[#d9d9dd] bg-white p-7 shadow-[0_24px_60px_rgba(23,23,28,0.18)] md:p-9">
         <p className="eyebrow text-[#1863dc]">Message sent</p>
         <p className="mt-4 max-w-md text-xl leading-relaxed text-[#17171c]">
           Thanks — we received your note and will get back to you at the email you provided.
@@ -57,7 +57,7 @@ function ContactFormFields() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-[#d9d9dd] bg-[#fffcf7] p-7 shadow-[0_24px_60px_rgba(23,23,28,0.18)] md:p-9"
+      className="rounded-2xl border border-[#d9d9dd] bg-white p-7 shadow-[0_24px_60px_rgba(23,23,28,0.18)] md:p-9"
     >
       <div className="mb-7 border-b border-[#d9d9dd] pb-5">
         <p className="eyebrow text-[#1863dc]">Inquiry</p>
@@ -183,7 +183,7 @@ export default function ContactForm() {
   return (
     <Suspense
       fallback={
-        <div className="rounded-2xl border border-[#d9d9dd] bg-[#fffcf7] p-7 text-neutral-500 md:p-9">
+        <div className="rounded-2xl border border-[#d9d9dd] bg-white p-7 text-neutral-500 md:p-9">
           Loading form…
         </div>
       }

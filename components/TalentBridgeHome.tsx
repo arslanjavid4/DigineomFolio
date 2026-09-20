@@ -15,16 +15,11 @@ import Image from 'next/image';
 import { animate, motion, useInView, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import SmoothHashLink from '@/components/SmoothHashLink';
-import { ZoomParallax } from '@/components/ui/zoom-parallax';
+import { WorkspaceGallery } from '@/components/WorkspaceGallery';
 import { ScrollChoreography } from '@/components/ui/scroll-choreography';
 import CostRateMap from '@/components/CostRateMap';
 import CostCutLedger from '@/components/illustrative/CostCutLedger';
-import {
-  ComparisonStrip,
-  HomeFaq,
-  MidMarketStrip,
-  TalentTeaser,
-} from '@/components/HomeEnrichments';
+import { HomeFaq, TalentTeaser } from '@/components/HomeEnrichments';
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -466,8 +461,48 @@ export default function TalentBridgeHome() {
         <ScrollChoreography cards={modelCards} />
       </section>
 
-      <MidMarketStrip />
       <TalentTeaser />
+
+      {/* Cost argument */}
+      <section id="cost" className="section-padding bg-[#1863dc] text-white">
+        <div className="container-custom">
+          <div className="mb-14 border-t border-white/25 pt-6">
+            <motion.h2 {...reveal} className="display text-4xl md:text-6xl">
+              Same standard. 60–75% less.
+            </motion.h2>
+            <motion.p
+              {...revealCopy}
+              className="mt-7 max-w-xl text-lg leading-relaxed text-white/75"
+            >
+              Advertised developer rates by region. The gap is the engine of the model — and the
+              reason a verified, seated engineer is not the same purchase as a cheap one.
+            </motion.p>
+          </div>
+
+          <motion.div {...reveal}>
+            <CostRateMap />
+          </motion.div>
+
+          <motion.div
+            {...reveal}
+            className="mt-14 grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]"
+          >
+            <div>
+              <h3 className="display text-3xl md:text-4xl">Watch the ledger clear.</h3>
+              <p className="mt-4 max-w-md text-base leading-relaxed text-white/75">
+                Local salary, benefits, recruiter fees, desk, and kit get handled by DigiNeom —
+                one seat remains on the books.
+              </p>
+            </div>
+            <CostCutLedger />
+          </motion.div>
+
+          <motion.p {...revealCopy} className="mt-8 text-sm text-white/55">
+            Rate benchmarks compiled from Accelerance, nCube, Upwork, Arc.dev, Glassdoor, and US BLS
+            data, 2025–2026. Ledger figures are illustrative monthly loads.
+          </motion.p>
+        </div>
+      </section>
 
       {/* The workspace */}
       <section id="workspace" className="relative scroll-mt-24 bg-[#1863dc] text-white">
@@ -488,7 +523,7 @@ export default function TalentBridgeHome() {
         </div>
 
         <div className="relative mt-8 md:mt-12">
-          <ZoomParallax images={workspaceShots} />
+          <WorkspaceGallery images={workspaceShots} />
         </div>
 
         <div className="container-custom px-5 pb-20 sm:px-8 md:pb-28 lg:px-12">
@@ -530,7 +565,7 @@ export default function TalentBridgeHome() {
                 {processPills.map((label) => (
                   <span
                     key={label}
-                    className="rounded-full border border-[#d9d9dd] bg-[#f1f5ff] px-3.5 py-1.5 text-sm text-[#17171c]"
+                    className="rounded-full border border-[#d9d9dd] bg-white px-3.5 py-1.5 text-sm text-[#17171c]"
                   >
                     {label}
                   </span>
@@ -579,50 +614,7 @@ export default function TalentBridgeHome() {
         </div>
       </section>
 
-      {/* Cost argument */}
-      <section id="cost" className="section-padding bg-[#1863dc] text-white">
-        <div className="container-custom">
-          <div className="mb-14 border-t border-white/25 pt-6">
-            <motion.h2 {...reveal} className="display text-4xl md:text-6xl">
-              Same standard. 60–75% less.
-            </motion.h2>
-            <motion.p
-              {...revealCopy}
-              className="mt-7 max-w-xl text-lg leading-relaxed text-white/75"
-            >
-              Advertised developer rates by region. The gap is the engine of the model — and the
-              reason a verified, seated engineer is not the same purchase as a cheap one.
-            </motion.p>
-          </div>
-
-          <motion.div {...reveal}>
-            <CostRateMap />
-          </motion.div>
-
-          <motion.div
-            {...reveal}
-            className="mt-14 grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]"
-          >
-            <div>
-              <h3 className="display text-3xl md:text-4xl">Watch the ledger clear.</h3>
-              <p className="mt-4 max-w-md text-base leading-relaxed text-white/75">
-                Local salary, benefits, recruiter fees, desk, and kit get handled by DigiNeom —
-                one seat remains on the books.
-              </p>
-            </div>
-            <CostCutLedger />
-          </motion.div>
-
-          <motion.p {...revealCopy} className="mt-8 text-sm text-white/55">
-            Rate benchmarks compiled from Accelerance, nCube, Upwork, Arc.dev, Glassdoor, and US BLS
-            data, 2025–2026. Ledger figures are illustrative monthly loads.
-          </motion.p>
-        </div>
-      </section>
-
-      <ComparisonStrip />
       <HomeFaq />
-
       <section className="section-padding bg-[#1863dc] text-white">
         <div className="container-custom border-t border-white/25 pt-7">
           <motion.h2

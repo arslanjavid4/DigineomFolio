@@ -162,8 +162,8 @@ export default function CostCutLedger({ className }: { className?: string }) {
                 layout
                 className={cn(
                   "border-t border-[#d9d9dd]/80 transition-colors",
-                  isActive && "bg-[#f1f5ff]",
-                  isHandled && "bg-[#fffcf7]",
+                  isActive && "bg-white",
+                  isHandled && "bg-white",
                 )}
               >
                 <td className="px-5 py-3.5">
@@ -186,7 +186,7 @@ export default function CostCutLedger({ className }: { className?: string }) {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                        className="inline-flex rounded-full border border-[#1863dc]/30 bg-[#f1f5ff] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1863dc]"
+                        className="inline-flex rounded-full border border-[#1863dc]/40 bg-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1863dc]"
                       >
                         Handled by DigiNeom
                       </motion.span>
@@ -265,7 +265,7 @@ export default function CostCutLedger({ className }: { className?: string }) {
         </tbody>
       </table>
 
-      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#d9d9dd] bg-[#f1f5ff] px-5 py-3.5">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#d9d9dd] bg-white px-5 py-3.5">
         <p className="text-xs text-neutral-600">
           {showSeat
             ? `Local load ~$${cutTotal.toLocaleString()} → DigiNeom seat ~$3,900`

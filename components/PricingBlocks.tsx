@@ -39,13 +39,13 @@ export function CostCalculator() {
       </label>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl bg-[#f1f5ff] p-4">
+        <div className="rounded-2xl bg-white border border-[#d9d9dd] p-4">
           <p className="text-xs text-neutral-500">Local</p>
           <p className="mt-1 font-mono text-xl text-[#17171c]">
             ${localMonthly.toLocaleString()}
           </p>
         </div>
-        <div className="rounded-2xl bg-[#f1f5ff] p-4">
+        <div className="rounded-2xl bg-white border border-[#d9d9dd] p-4">
           <p className="text-xs text-neutral-500">DigiNeom seat</p>
           <p className="mt-1 font-mono text-xl text-[#1863dc]">
             ~${digineomMonthly.toLocaleString()}
