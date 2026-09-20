@@ -5,15 +5,6 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     domains: ['images.unsplash.com', 'via.placeholder.com', 'plus.unsplash.com', 'placehold.co'],
   },
-  async redirects() {
-    return [
-      {
-        source: '/about',
-        destination: '/',
-        permanent: true,
-      },
-    ]
-  },
   async headers() {
     return [
       {
@@ -42,4 +33,3 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
-

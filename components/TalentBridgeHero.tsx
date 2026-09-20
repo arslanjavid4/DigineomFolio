@@ -6,17 +6,16 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { WorldMap } from "@/components/ui/world-map";
 import SmoothHashLink from "@/components/SmoothHashLink";
+import { HERO_PLACEMENTS } from "@/lib/digineom-content";
 
-const cities = [
-  { lat: 31.5204, lng: 74.3587 },
-  { lat: 51.5074, lng: -0.1278 },
-  { lat: 40.7128, lng: -74.006 },
-  { lat: 37.7749, lng: -122.4194 },
-];
-
-const routes = cities.map((start, index) => ({
-  start,
-  end: cities[(index + 1) % cities.length],
+const routes = HERO_PLACEMENTS.map((placement) => ({
+  start: placement.origin,
+  end: placement.destination,
+  engineer: {
+    firstName: placement.firstName,
+    role: placement.role,
+    stars: placement.stars,
+  },
 }));
 
 export default function TalentBridgeHero({ children }: { children?: ReactNode }) {
@@ -39,7 +38,8 @@ export default function TalentBridgeHero({ children }: { children?: ReactNode })
               transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
               className="mt-10 max-w-[46ch] text-base leading-relaxed text-neutral-500 md:text-lg"
             >
-              Degree-verified Pakistani engineers for Europe and North America, working from co-working spaces we manage.
+              Degree-verified Pakistani engineers for Europe and North America, working from
+              co-working spaces we manage — not from home.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 10 }}

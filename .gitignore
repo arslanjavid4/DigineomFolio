@@ -15,9 +15,10 @@
 # production
 /build
 
-# misc
-.DS_Store
-*.pem
+.tmp-opensourceui/
+.tmp-vetting.png
+tmp-vetting.png
+
 
 # debug
 npm-debug.log*

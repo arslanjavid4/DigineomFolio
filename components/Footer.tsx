@@ -4,6 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { SITE_EMAIL, SITE_LINKEDIN } from "@/lib/site";
 
+const explore = [
+  { href: "/talent", label: "Talent" },
+  { href: "/clients", label: "Clients" },
+  { href: "/hubs", label: "Hubs" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -28,11 +37,17 @@ export default function Footer() {
             </p>
           </div>
           <div className="md:justify-self-end">
-            <p className="eyebrow mb-4 text-[#1863dc]">Connect</p>
-            <div className="space-y-3 text-sm">
-              <Link className="block text-[#17171c]/75 hover:text-[#17171c]" href="/contact">
-                Contact
-              </Link>
+            <p className="eyebrow mb-4 text-[#1863dc]">Explore</p>
+            <div className="grid grid-cols-2 gap-x-10 gap-y-3 text-sm">
+              {explore.map((item) => (
+                <Link
+                  key={item.href}
+                  className="block text-[#17171c]/75 hover:text-[#17171c]"
+                  href={item.href}
+                >
+                  {item.label}
+                </Link>
+              ))}
               <a className="block text-[#17171c]/75 hover:text-[#17171c]" href={`mailto:${SITE_EMAIL}`}>
                 {SITE_EMAIL}
               </a>

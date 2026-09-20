@@ -18,6 +18,13 @@ import SmoothHashLink from '@/components/SmoothHashLink';
 import { ZoomParallax } from '@/components/ui/zoom-parallax';
 import { ScrollChoreography } from '@/components/ui/scroll-choreography';
 import CostRateMap from '@/components/CostRateMap';
+import CostCutLedger from '@/components/illustrative/CostCutLedger';
+import {
+  ComparisonStrip,
+  HomeFaq,
+  MidMarketStrip,
+  TalentTeaser,
+} from '@/components/HomeEnrichments';
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -459,6 +466,9 @@ export default function TalentBridgeHome() {
         <ScrollChoreography cards={modelCards} />
       </section>
 
+      <MidMarketStrip />
+      <TalentTeaser />
+
       {/* The workspace */}
       <section id="workspace" className="relative scroll-mt-24 bg-[#1863dc] text-white">
         <div className="container-custom px-5 pt-20 sm:px-8 md:pt-28 lg:px-12">
@@ -589,12 +599,29 @@ export default function TalentBridgeHome() {
             <CostRateMap />
           </motion.div>
 
+          <motion.div
+            {...reveal}
+            className="mt-14 grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]"
+          >
+            <div>
+              <h3 className="display text-3xl md:text-4xl">Watch the ledger clear.</h3>
+              <p className="mt-4 max-w-md text-base leading-relaxed text-white/75">
+                Local salary, benefits, recruiter fees, desk, and kit get handled by DigiNeom —
+                one seat remains on the books.
+              </p>
+            </div>
+            <CostCutLedger />
+          </motion.div>
+
           <motion.p {...revealCopy} className="mt-8 text-sm text-white/55">
             Rate benchmarks compiled from Accelerance, nCube, Upwork, Arc.dev, Glassdoor, and US BLS
-            data, 2025–2026.
+            data, 2025–2026. Ledger figures are illustrative monthly loads.
           </motion.p>
         </div>
       </section>
+
+      <ComparisonStrip />
+      <HomeFaq />
 
       <section className="section-padding bg-[#1863dc] text-white">
         <div className="container-custom border-t border-white/25 pt-7">

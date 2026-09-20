@@ -5,24 +5,33 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import DottedMap from "dotted-map";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { EngineerProfileMini } from "@/components/illustrative/EngineerProfile";
+
+export type MapPlacement = {
+  start: { lat: number; lng: number; label?: string };
+  end: { lat: number; lng: number; label?: string };
+  engineer?: {
+    firstName: string;
+    role: string;
+    stars?: number;
+  };
+};
 
 interface MapProps {
-  dots?: Array<{
-    start: { lat: number; lng: number; label?: string };
-    end: { lat: number; lng: number; label?: string };
-  }>;
+  dots?: MapPlacement[];
   lineColor?: string;
   className?: string;
 }
 
 const DRAW_MS = 2200;
-const HOLD_MS = 520;
+const HOLD_MS = 900;
 const FADE_S = 0.4;
 
 function projectPoint(lat: number, lng: number) {
-  const x = (lng + 180) * (800 / 360);
-  const y = (90 - lat) * (400 / 180);
-  return { x, y };
+  return {
+    x: (lng + 180) * (800 / 360),
+    y: (90 - lat) * (400 / 180),
+  };
 }
 
 function createCurvedPath(
@@ -63,7 +72,14 @@ export function WorldMap({
       dots.map((dot) => {
         const start = projectPoint(dot.start.lat, dot.start.lng);
         const end = projectPoint(dot.end.lat, dot.end.lng);
-        return { start, end, d: createCurvedPath(start, end) };
+        return {
+          start,
+          end,
+          d: createCurvedPath(start, end),
+          engineer: dot.engineer,
+          fromLabel: dot.start.label,
+          toLabel: dot.end.label,
+        };
       }),
     [dots]
   );
@@ -90,7 +106,9 @@ export function WorldMap({
     return () => window.clearTimeout(id);
   }, [active, reduceMotion, routes.length]);
 
-  const current = routes[active];
+  const current = routes[active] ?? routes[0];
+  const chipLeft = current ? Math.min(78, Math.max(8, (current.start.x / 800) * 100 + 2)) : 12;
+  const chipTop = current ? Math.min(72, Math.max(8, (current.start.y / 400) * 100 - 14)) : 18;
 
   return (
     <div className={cn("relative aspect-[2/1] w-full font-sans", className)}>
@@ -117,13 +135,7 @@ export function WorldMap({
         </defs>
 
         {cities.map((city) => (
-          <circle
-            key={`${city.x}-${city.y}`}
-            cx={city.x}
-            cy={city.y}
-            r="2"
-            fill={lineColor}
-          />
+          <circle key={`${city.x}-${city.y}`} cx={city.x} cy={city.y} r="2" fill={lineColor} />
         ))}
 
         {reduceMotion
@@ -183,6 +195,28 @@ export function WorldMap({
               </AnimatePresence>
             )}
       </svg>
+
+      {current?.engineer ? (
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`${active}-${current.engineer.firstName}`}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.35 }}
+            className="pointer-events-none absolute z-10"
+            style={{ left: `${chipLeft}%`, top: `${chipTop}%` }}
+          >
+            <EngineerProfileMini
+              firstName={current.engineer.firstName}
+              role={current.engineer.role}
+              stars={current.engineer.stars ?? 5}
+              fromLabel={current.fromLabel}
+              toLabel={current.toLabel}
+            />
+          </motion.div>
+        </AnimatePresence>
+      ) : null}
     </div>
   );
 }

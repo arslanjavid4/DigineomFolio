@@ -14,6 +14,11 @@ export default function OnPageSeo() {
         <a href="/#process">Four steps to hire a Pakistani software engineer</a>
         <a href="/#vetting">How we vet remote talent from Pakistan</a>
         <a href="/#cost">Pakistani engineer rates versus Europe and North America</a>
+        <a href="/talent">Talent directory</a>
+        <a href="/clients">Mid-market client stories</a>
+        <a href="/hubs">Managed hubs</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/about">About DigiNeom</a>
         <a href="/contact">Talk to us about a role</a>
       </nav>
     </div>
